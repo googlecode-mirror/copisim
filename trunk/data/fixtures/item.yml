@@ -1,0 +1,273 @@
+copisim_item:
+  1:
+    copisim_periode: 2009
+    type: region
+    titre: Aix-Marseille
+  2:
+    copisim_periode: 2009
+    type: region
+    titre: Amiens
+  3:
+    copisim_periode: 2009
+    type: region
+    titre: Angers
+  4:
+    copisim_periode: 2009
+    type: region
+    titre: Antilles-Guyane
+  5:
+    copisim_periode: 2009
+    type: region
+    titre: Besançon
+  6:
+    copisim_periode: 2009
+    type: region
+    titre: Bordeaux
+  7:
+    copisim_periode: 2009
+    type: region
+    titre: Brest
+  8:
+    copisim_periode: 2009
+    type: region
+    titre: Caen
+  9:
+    copisim_periode: 2009
+    type: region
+    titre: Clermont-Ferrand
+  10:
+    copisim_periode: 2009
+    type: region
+    titre: Dijon
+  11:
+    copisim_periode: 2009
+    type: region
+    titre: Grenoble
+  12:
+    copisim_periode: 2009
+    type: region
+    titre: Ile-de-France
+  13:
+    copisim_periode: 2009
+    type: region
+    titre: Lille
+  14:
+    copisim_periode: 2009
+    type: region
+    titre: Limoges
+  15:
+    copisim_periode: 2009
+    type: region
+    titre: Lyon
+  16:
+    copisim_periode: 2009
+    type: region
+    titre: Montpellier-Nîmes
+  17:
+    copisim_periode: 2009
+    type: region
+    titre: Nancy
+  18:
+    copisim_periode: 2009
+    type: region
+    titre: Nantes
+  19:
+    copisim_periode: 2009
+    type: region
+    titre: Nice
+  20:
+    copisim_periode: 2009
+    type: region
+    titre: Océan Indien
+  21:
+    copisim_periode: 2009
+    type: region
+    titre: Poitiers
+  22:
+    copisim_periode: 2009
+    type: region
+    titre: Reims
+  23:
+    copisim_periode: 2009
+    type: region
+    titre: Rennes
+  24:
+    copisim_periode: 2009
+    type: region
+    titre: Rouen
+  25:
+    copisim_periode: 2009
+    type: region
+    titre: Saint-Etienne
+  26:
+    copisim_periode: 2009
+    type: region
+    titre: Strasbourg
+  27:
+    copisim_periode: 2009
+    type: region
+    titre: Toulouse
+  28:
+    copisim_periode: 2009
+    type: region
+    titre: Tours
+  29:
+    copisim_periode: 2009
+    type: filiere
+    titre: Anesthésie-Réanimation
+  30:
+    copisim_periode: 2009
+    type: filiere
+    titre: Biologie Médicale
+  31:
+    copisim_periode: 2009
+    type: filiere
+    titre: Gynécologie Médicale
+  32:
+    copisim_periode: 2009
+    type: filiere
+    titre: Gynécologie Obstétrique
+  33:
+    copisim_periode: 2009
+    type: filiere
+    titre: Médecine Générale
+  34:
+    copisim_periode: 2009
+    type: filiere
+    titre: Médecine du Travail
+  35:
+    copisim_periode: 2009
+    type: filiere
+    titre: Psychiatrie
+  36:
+    copisim_periode: 2009
+    type: filiere
+    titre: Pédiatrie
+  37:
+    copisim_periode: 2009
+    type: filiere
+    titre: Santé Publique
+  38:
+    copisim_periode: 2009
+    type: filiere
+    titre: Spécialités Chirurgicales
+  39:
+    copisim_periode: 2009
+    type: filiere
+    titre: Spécialités Médicales
+  70:
+    copisim_periode: 2009
+    type: med
+    titre: Anatomie et cytologie pathologiques
+  71:
+    copisim_periode: 2009
+    type: med
+    titre: Cardiologie et maladies vasculaires
+  72:
+    copisim_periode: 2009
+    type: med
+    titre: Dermatologie et vénéréologie
+  73:
+    copisim_periode: 2009
+    type: med
+    titre: Endocrinologie et métabolisme
+  74:
+    copisim_periode: 2009
+    type: med
+    titre: Gastro-entérologie et hépatologie
+  75:
+    copisim_periode: 2009
+    type: med
+    titre: Hématologie
+  76:
+    copisim_periode: 2009
+    type: med
+    titre: Médecine interne
+  77:
+    copisim_periode: 2009
+    type: med
+    titre: Médecine nucléaire
+  78:
+    copisim_periode: 2009
+    type: med
+    titre: Médecine physique et de réadaptation
+  79:
+    copisim_periode: 2009
+    type: med
+    titre: Néphrologie
+  80:
+    copisim_periode: 2009
+    type: med
+    titre: Oncologie
+  81:
+    copisim_periode: 2009
+    type: med
+    titre: Pathologies cardio-vasculaires
+  82:
+    copisim_periode: 2009
+    type: med
+    titre: Pneumologie
+  83:
+    copisim_periode: 2009
+    type: med
+    titre: Radiodiagnostic et imagerie médicale
+  84:
+    copisim_periode: 2009
+    type: med
+    titre: Rhumatologie
+  99:
+    copisim_periode: 2009
+    type: med
+    titre: Génétique médicale
+  86:
+    copisim_periode: 2009
+    type: chir
+    titre: Neurochirurgie
+  87:
+    copisim_periode: 2009
+    type: chir
+    titre: Ophtalmologie
+  88:
+    copisim_periode: 2009
+    type: chir
+    titre: Oto-rhino-laryngologie et chirurgie cervico-faciale
+  89:
+    copisim_periode: 2009
+    type: chir
+    titre: Stomatologie
+  90:
+    copisim_periode: 2009
+    type: med
+    titre: Neurologie
+  91:
+    copisim_periode: 2009
+    type: chir
+    titre: Chirurgie infantile (chirurgie générale)
+  92:
+    copisim_periode: 2009
+    type: chir
+    titre: Chirurgie maxillo-faciale et stomatologie (chirurgie générale)
+  93:
+    copisim_periode: 2009
+    type: chir
+    titre: Chirurgie orthopédique et traumatologie (chirurgie générale)
+  94:
+    copisim_periode: 2009
+    type: chir
+    titre: Chirurgie plastique reconstructrice et esthétique (chirurgie générale)
+  95:
+    copisim_periode: 2009
+    type: chir
+    titre: Chirurgie thoracique et cardio-vasculaire (chirurgie générale)
+  96:
+    copisim_periode: 2009
+    type: chir
+    titre: Chirurgie urologique (chirurgie générale)
+  97:
+    copisim_periode: 2009
+    type: chir
+    titre: Chirurgie vasculaire (chirurgie générale)
+  98:
+    copisim_periode: 2009
+    type: chir
+    titre: Chirurgie viscérale et digestive (chirurgie générale)
