@@ -1,0 +1,67 @@
+copisim_etudiant:
+  actAs:
+    Timestampable: ~
+  columns:
+    nom: { type: string(50), notnull: true }
+    prenom: { type: string(50), notnull: true }
+    fac: { type: integer, notnull: true }
+    naissance: { type: date }
+    email: { type: string(255), notnull: true }
+    anonyme: { type: boolean, notnull: true, default: 0 }
+    doublant: { type: boolean, notnull: true, default: 0 }
+    classement: { type: integer, notnull: true }
+  relations:
+    copisim_item: { local: fac, foreign: id }
+
+copisim_item:
+#  actAs:
+  columns:
+    periode: { type: integer, notnull: true }
+    type: { type: string(20), notnull: true }
+    titre: { type: string(255), notnull: true }
+  relations:
+    copisim_periode: { local: periode, foreign: id }
+
+copisim_periode:
+#  actAs:
+  columns:
+    annee: { type: year, notnull: true }
+    debut_choix: { type: date, notnull: true }
+    fin_choix: { type: date, notnull: true }
+
+copisim_poste:
+#  actAs:
+  columns:
+    periode: { type: integer, notnull: true }
+    ville: { type: integer, notnull: true }
+    filiere: { type: integer, notnull: true }
+    total: { type: integer, notnull: true }
+  relations:
+    copisim_periode: { local: periode, foreign: id }
+    copisim_item: { local: ville, foreign: id }
+    copisim_item: { local: filiere, foreign: id }
+
+copisim_choix:
+  actAs:
+    Timestampable: ~
+  columns:
+    etudiant: { type: integer, notnull: true }
+    poste: { type: integer, notnull: true }
+    complement: { type: integer, notnull: true }
+    ordre: { type: integer, notnull: true }
+  relations:
+    copisim_poste: { local: poste, foreign: id }
+    copisim_item: { local: complement, foreign: id }
+
+copisim_flux:
+#  actAs:
+    columns:
+      periode: { type: integer, notnull: true }
+      ville: { type: integer, notnull: true }
+      complement: { type: integer, notnull: true }
+      total: { type: integer, notnull: true }
+    relations:
+      copisim_periode: { local: periode, foreign: id }
+      copisim_item: { local: ville, foreign: id }
+      copisim_item: { local: complement, foreign: id }
+
