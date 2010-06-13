@@ -8,62 +8,50 @@
  * @author     Pierre-FrançoisPilouAngrand
  * @version    SVN: $Id: actions.class.php 23810 2009-11-12 11:07:44Z Kris.Wallsmith $
  */
+
 class etudiantActions extends sfActions
 {
   public function executeIndex(sfWebRequest $request)
   {
-    $this->copisim_etudiants = Doctrine::getTable('copisim_etudiant')
-      ->createQuery('a')
-      ->execute();
-  }
+//    $this->user = $this->getUser()->getUsername();
 
-  public function executeShow(sfWebRequest $request)
-  {
-    $this->copisim_etudiant = Doctrine::getTable('copisim_etudiant')->find(array($request->getParameter('id')));
-    $this->forward404Unless($this->copisim_etudiant);
-  }
-
-  public function executeNew(sfWebRequest $request)
-  {
-    $this->form = new copisim_etudiantForm();
-  }
-
-  public function executeCreate(sfWebRequest $request)
-  {
-    $this->forward404Unless($request->isMethod(sfRequest::POST));
-
-    $this->form = new copisim_etudiantForm();
-
-    $this->processForm($request, $this->form);
-
-    $this->setTemplate('new');
+//    if(!Doctrine::getTable('CopisimEtudiant')->checkValidMail($this->getUser()->getUsername()))
+//    {
+//      $this->getUser()->setFlash('error','Adresse email non fournie ou non validée !');
+//      $this->redirect('etudiant/edit');
+//    }
   }
 
   public function executeEdit(sfWebRequest $request)
   {
-    $this->forward404Unless($copisim_etudiant = Doctrine::getTable('copisim_etudiant')->find(array($request->getParameter('id'))), sprintf('Object copisim_etudiant does not exist (%s).', $request->getParameter('id')));
-    $this->form = new copisim_etudiantForm($copisim_etudiant);
+    $this->forward404Unless($copisim_etudiant = Doctrine::getTable('CopisimEtudiant')->find(array('id' => $this->getUser()->getUsername())), sprintf('Utilisateur inconnu : (%s).', $this->getUser()->getUsername()));
+    if(!$copisim_etudiant->getEmailTmp())
+      $copisim_etudiant->setEmailTmp($copisim_etudiant->getEmail());
+    $this->form = new CopisimEtudiantForm($copisim_etudiant);
   }
 
   public function executeUpdate(sfWebRequest $request)
   {
     $this->forward404Unless($request->isMethod(sfRequest::POST) || $request->isMethod(sfRequest::PUT));
-    $this->forward404Unless($copisim_etudiant = Doctrine::getTable('copisim_etudiant')->find(array($request->getParameter('id'))), sprintf('Object copisim_etudiant does not exist (%s).', $request->getParameter('id')));
-    $this->form = new copisim_etudiantForm($copisim_etudiant);
+    $this->forward404Unless($copisim_etudiant = Doctrine::getTable('CopisimEtudiant')->find(array($this->getUser()->getUsername())), sprintf('Object copisim_etudiant does not exist (%s).', $request->getParameter('id')));
+    $this->form = new CopisimEtudiantForm($copisim_etudiant);
 
     $this->processForm($request, $this->form);
 
     $this->setTemplate('edit');
   }
 
-  public function executeDelete(sfWebRequest $request)
+  public function executeMail(sfWebRequest $request)
   {
-    $request->checkCSRFProtection();
+    if(Doctrine::getTable('CopisimEtudiant')->validTokenMail($request['userid'], $request['token']))
+      $this->getUser()->setFlash('notice','Adresse e-mail validée.');
+    else
+      $this->getUser()->setFlash('error','Erreur de validation d\'adresse e-mail.');
 
-    $this->forward404Unless($copisim_etudiant = Doctrine::getTable('copisim_etudiant')->find(array($request->getParameter('id'))), sprintf('Object copisim_etudiant does not exist (%s).', $request->getParameter('id')));
-    $copisim_etudiant->delete();
-
-    $this->redirect('etudiant/index');
+    if($this->getUser()->isAuthenticated())
+      $this->redirect('etudiant/index');
+    else
+      $this->redirect('@homepage');
   }
 
   protected function processForm(sfWebRequest $request, sfForm $form)
@@ -71,9 +59,13 @@ class etudiantActions extends sfActions
     $form->bind($request->getParameter($form->getName()), $request->getFiles($form->getName()));
     if ($form->isValid())
     {
-      $copisim_etudiant = $form->save();
+      $form->save();
+      $form_pass = $form->getEmbeddedForm('MdP');
+      $form_pass->bind($form->getValue('MdP'));
+      $form_pass->save();
+//      $this->getUser()->setFlash('notice','Mise à jour du profil effectuée.');
 
-      $this->redirect('etudiant/edit?id='.$copisim_etudiant->getId());
+      $this->redirect('etudiant/edit');
     }
   }
 }

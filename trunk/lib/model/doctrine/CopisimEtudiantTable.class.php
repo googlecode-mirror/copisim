@@ -8,4 +8,20 @@ class CopisimEtudiantTable extends Doctrine_Table
     {
         return Doctrine_Core::getTable('CopisimEtudiant');
     }
+
+    public function checkValidMail($user)
+    {
+      $q = Doctrine_Query::create()
+        ->from('CopisimEtudiant a')
+	->select('a.email, a.email_tmp')
+	->where('a.id = ?', $user)
+	->limit(1)
+	->fetchOne();
+      
+      if (!$q->getEmail() or $q->getEmailTmp())
+        return false;
+      else
+        return true;
+    }
+
 }

@@ -12,4 +12,44 @@
  */
 class CopisimEtudiant extends BaseCopisimEtudiant
 {
+   public function __toString()
+   {
+     return sprintf('%s %s', $this->getNom(), $this->getPrenom());
+   }
+   
+   public function save(Doctrine_Connection $conn = null)
+   {
+     if ($this->getEmail() != $this->getEmailTmp() and $this->getEmailTmp())
+       $this->sendMailValidation($this->getEmailTmp());
+     else
+       $this->setEmailTmp('');
+       
+     return parent::save($conn);
+   }
+
+   
+   public function sendMailValidation($email)
+   {
+     $user = sfContext::getInstance()->getUser()->getUsername();
+     $url = csSettings::get('baseurl');
+     $token = sha1(sfContext::getInstance()->getUser()->getUsername().$email);
+     $message = sfContext::getInstance()->getMailer()->compose(
+       array(csSettings::get('email') => csSettings::get('email_nom')),
+       $email,
+       '['.csSettings::get('email_prefixe').'] Validation de votre nouvelle adresse mail',
+<<<EOF
+Bonjour,
+
+Vous venez de changer votre adresse mail sur COPIsim. Pour valider le changement d'adresse e-mail, nous vous prions de bien vouloir aller sur le lien suivant :
+
+{$url}etudiant/mail/{$user}/{$token}
+
+Merci.
+
+L'administration.
+Ce message a été généré automatiquement, merci de ne pas y répondre.
+EOF
+     );
+     sfContext::getInstance()->getMailer()->send($message);
+   }
 }
