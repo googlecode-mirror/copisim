@@ -1,4 +1,4 @@
-copisim_etudiant:
+CopisimEtudiant:
   actAs:
     Timestampable: ~
   columns:
@@ -6,30 +6,31 @@ copisim_etudiant:
     prenom: { type: string(50), notnull: true }
     fac: { type: integer, notnull: true }
     naissance: { type: date }
-    email: { type: string(255), notnull: true }
+    email: { type: string(100), notnull: true }
+    email_tmp: { type: string(100), notnull: true }
     anonyme: { type: boolean, notnull: true, default: 0 }
     doublant: { type: boolean, notnull: true, default: 0 }
     classement: { type: integer, notnull: true }
   relations:
-    copisim_item: { local: fac, foreign: id }
+    CopisimItem: { local: fac, foreign: id }
 
-copisim_item:
+CopisimItem:
 #  actAs:
   columns:
     periode: { type: integer, notnull: true }
     type: { type: string(20), notnull: true }
     titre: { type: string(255), notnull: true }
   relations:
-    copisim_periode: { local: periode, foreign: id }
+    CopisimPeriode: { local: periode, foreign: id }
 
-copisim_periode:
+CopisimPeriode:
 #  actAs:
   columns:
     annee: { type: year, notnull: true }
     debut_choix: { type: date, notnull: true }
     fin_choix: { type: date, notnull: true }
 
-copisim_poste:
+CopisimPoste:
 #  actAs:
   columns:
     periode: { type: integer, notnull: true }
@@ -37,11 +38,11 @@ copisim_poste:
     filiere: { type: integer, notnull: true }
     total: { type: integer, notnull: true }
   relations:
-    copisim_periode: { local: periode, foreign: id }
-    copisim_item: { local: ville, foreign: id }
-    copisim_item: { local: filiere, foreign: id }
+    CopisimPeriode: { local: periode, foreign: id }
+    CopisimItem: { local: ville, foreign: id }
+    CopisimItem: { local: filiere, foreign: id }
 
-copisim_choix:
+CopisimChoix:
   actAs:
     Timestampable: ~
   columns:
@@ -51,9 +52,9 @@ copisim_choix:
     ordre: { type: integer, notnull: true }
   relations:
     copisim_poste: { local: poste, foreign: id }
-    copisim_item: { local: complement, foreign: id }
+    CopisimItem: { local: complement, foreign: id }
 
-copisim_flux:
+CopisimFlux:
 #  actAs:
     columns:
       periode: { type: integer, notnull: true }
@@ -61,7 +62,7 @@ copisim_flux:
       complement: { type: integer, notnull: true }
       total: { type: integer, notnull: true }
     relations:
-      copisim_periode: { local: periode, foreign: id }
-      copisim_item: { local: ville, foreign: id }
-      copisim_item: { local: complement, foreign: id }
+      CopisimPeriode: { local: periode, foreign: id }
+      CopisimItem: { local: ville, foreign: id }
+      CopisimItem: { local: complement, foreign: id }
 
