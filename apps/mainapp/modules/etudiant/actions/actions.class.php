@@ -13,13 +13,10 @@ class etudiantActions extends sfActions
 {
   public function executeIndex(sfWebRequest $request)
   {
-//    $this->user = $this->getUser()->getUsername();
-
-//    if(!Doctrine::getTable('CopisimEtudiant')->checkValidMail($this->getUser()->getUsername()))
-//    {
-//      $this->getUser()->setFlash('error','Adresse email non fournie ou non validée !');
-//      $this->redirect('etudiant/edit');
-//    }
+    $copisim_etudiants = Doctrine::getTable('CopisimEtudiant')
+      ->createQuery('a')
+      ->orderBy('classement asc')
+      ->execute();
   }
 
   public function executeEdit(sfWebRequest $request)
