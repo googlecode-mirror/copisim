@@ -12,27 +12,27 @@ class choixActions extends sfActions
 {
   public function executeIndex(sfWebRequest $request)
   {
-    $this->copisim_choixs = Doctrine::getTable('copisim_choix')
+    $this->copisim_choixs = Doctrine::getTable('CopisimChoix')
       ->createQuery('a')
       ->execute();
   }
 
   public function executeShow(sfWebRequest $request)
   {
-    $this->copisim_choix = Doctrine::getTable('copisim_choix')->find(array($request->getParameter('id')));
+    $this->copisim_choix = Doctrine::getTable('CopisimChoix')->find(array($request->getParameter('id')));
     $this->forward404Unless($this->copisim_choix);
   }
 
   public function executeNew(sfWebRequest $request)
   {
-    $this->form = new copisim_choixForm();
+    $this->form = new CopisimChoixForm();
   }
 
   public function executeCreate(sfWebRequest $request)
   {
     $this->forward404Unless($request->isMethod(sfRequest::POST));
 
-    $this->form = new copisim_choixForm();
+    $this->form = new CopisimChoixForm();
 
     $this->processForm($request, $this->form);
 
@@ -41,15 +41,15 @@ class choixActions extends sfActions
 
   public function executeEdit(sfWebRequest $request)
   {
-    $this->forward404Unless($copisim_choix = Doctrine::getTable('copisim_choix')->find(array($request->getParameter('id'))), sprintf('Object copisim_choix does not exist (%s).', $request->getParameter('id')));
-    $this->form = new copisim_choixForm($copisim_choix);
+    $this->forward404Unless($copisim_choix = Doctrine::getTable('CopisimChoix')->find(array($request->getParameter('id'))), sprintf('Object CopisimChoix does not exist (%s).', $request->getParameter('id')));
+    $this->form = new CopisimCoixForm($copisim_choix);
   }
 
   public function executeUpdate(sfWebRequest $request)
   {
     $this->forward404Unless($request->isMethod(sfRequest::POST) || $request->isMethod(sfRequest::PUT));
-    $this->forward404Unless($copisim_choix = Doctrine::getTable('copisim_choix')->find(array($request->getParameter('id'))), sprintf('Object copisim_choix does not exist (%s).', $request->getParameter('id')));
-    $this->form = new copisim_choixForm($copisim_choix);
+    $this->forward404Unless($copisim_choix = Doctrine::getTable('CopisimChoix')->find(array($request->getParameter('id'))), sprintf('Object CopisimChoix does not exist (%s).', $request->getParameter('id')));
+    $this->form = new CopisimChoixForm($copisim_choix);
 
     $this->processForm($request, $this->form);
 
@@ -60,7 +60,7 @@ class choixActions extends sfActions
   {
     $request->checkCSRFProtection();
 
-    $this->forward404Unless($copisim_choix = Doctrine::getTable('copisim_choix')->find(array($request->getParameter('id'))), sprintf('Object copisim_choix does not exist (%s).', $request->getParameter('id')));
+    $this->forward404Unless($copisim_choix = Doctrine::getTable('CopisimChoix')->find(array($request->getParameter('id'))), sprintf('Object CopisimChoix does not exist (%s).', $request->getParameter('id')));
     $copisim_choix->delete();
 
     $this->redirect('choix/index');

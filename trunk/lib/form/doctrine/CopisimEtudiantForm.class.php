@@ -14,7 +14,7 @@ class CopisimEtudiantForm extends BaseCopisimEtudiantForm
   {
     $this->embedForm('MdP', new gessehUserPasswordForm(sfContext::getInstance()->getUser()->getGuardUser()));
     
-    unset($this['promo_id'], $this['created_at'], $this['updated_at']);
+    unset($this['nom'], $this['prenom'], $this['fac'], $this['created_at'], $this['updated_at']);
     
     $this->validatorSchema['email_tmp'] = new sfValidatorAnd(array(
       $this->validatorSchema['email_tmp'],

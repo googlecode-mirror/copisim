@@ -7,7 +7,7 @@ default:
 
   metas:
     title:        COPIsim
-    description:  Simulateur de choix de postes d'interne officieux
+    description:  Simulateur officieux de choix de postes d'interne
     #keywords:     symfony, project
     language:     fr
     robots:       index, follow
