@@ -12,4 +12,8 @@
  */
 class CopisimPeriode extends BaseCopisimPeriode
 {
+  public function __toString()
+  {
+    return $this->getAnnee();
+  }
 }

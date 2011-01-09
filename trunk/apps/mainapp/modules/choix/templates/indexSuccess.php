@@ -1,30 +1,31 @@
-<h1>Copisim choixs List</h1>
+<h1>Répartition des postes</h1>
 
 <table>
   <thead>
     <tr>
-      <th>Id</th>
-      <th>Etudiant</th>
-      <th>Poste</th>
-      <th>Complement</th>
-      <th>Ordre</th>
-      <th>Created at</th>
-      <th>Updated at</th>
+		  <th></th>
+		  <?php foreach($copisim_filieres as $filiere): ?>
+      <th><?php echo $filiere->getTitre(); ?></th>
+			<?php endforeach; ?>
     </tr>
   </thead>
   <tbody>
-    <?php foreach ($copisim_choixs as $copisim_choix): ?>
+    <?php foreach ($copisim_regions as $region): ?>
     <tr>
-      <td><a href="<?php echo url_for('choix/show?id='.$copisim_choix->getId()) ?>"><?php echo $copisim_choix->getId() ?></a></td>
-      <td><?php echo $copisim_choix->getEtudiant() ?></td>
-      <td><?php echo $copisim_choix->getPoste() ?></td>
-      <td><?php echo $copisim_choix->getComplement() ?></td>
-      <td><?php echo $copisim_choix->getOrdre() ?></td>
-      <td><?php echo $copisim_choix->getCreatedAt() ?></td>
-      <td><?php echo $copisim_choix->getUpdatedAt() ?></td>
+		  <td><?php echo $region->getTitre(); ?></td>
+		  <?php foreach ($copisim_filieres as $filiere): ?>
+      <td>
+			  <?php 
+				  if(null !== $copisim_postes[$filiere->getId()][$region->getId()]):
+						echo $copisim_postes[$filiere->getId()][$region->getId()];
+					else:
+						echo '0';
+					endif;
+				?>
+			</td>
+			<?php endforeach; ?>
     </tr>
     <?php endforeach; ?>
   </tbody>
 </table>
 
-  <a href="<?php echo url_for('choix/new') ?>">New</a>

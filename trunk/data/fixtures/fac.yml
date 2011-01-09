@@ -1,0 +1,125 @@
+CopisimFac:
+  Marseille:
+    CopisimPeriode: 2009
+    titre: Aix-Marseille
+  Amiens:
+    CopisimPeriode: 2009
+    titre: Amiens
+  Angers:
+    CopisimPeriode: 2009
+    titre: Angers
+  Besancon:
+    CopisimPeriode: 2009
+    titre: Besancon
+  Bordeaux1:
+    CopisimPeriode: 2009
+    titre: Bordeaux 1
+  Bordeaux2:
+    CopisimPeriode: 2009
+    titre: Bordeaux 2
+  Bordeaux3:
+    CopisimPeriode: 2009
+    titre: Bordeaux 3
+  Brest:
+    CopisimPeriode: 2009
+    titre: Brest
+  Caen:
+    CopisimPeriode: 2009
+    titre: Caen
+  Ferrand:
+    CopisimPeriode: 2009
+    titre: Clermont-Ferrand
+  Dijon:
+    CopisimPeriode: 2009
+    titre: Dijon
+  Grenoble:
+    CopisimPeriode: 2009
+    titre: Grenoble
+  Etat:
+    CopisimPeriode: 2009
+    titre: Lille Etat
+  Catho:
+    CopisimPeriode: 2009
+    titre: Lille Catho
+  Limoges:
+    CopisimPeriode: 2009
+    titre: Limoges
+  GrangeBlanche:
+    CopisimPeriode: 2009
+    titre: Lyon Grange-Blanche
+  Laennec:
+    CopisimPeriode: 2009
+    titre: Lyon Laennec
+  Nord:
+    CopisimPeriode: 2009
+    titre: Lyon Nord
+  Sud:
+    CopisimPeriode: 2009
+    titre: Lyon Sud
+  Montpellier:
+    CopisimPeriode: 2009
+    titre: Montpellier-N√Æe
+  Nancy:
+    CopisimPeriode: 2009
+    titre: Nancy
+  Nantes:
+    CopisimPeriode: 2009
+    titre: Nantes
+  Nice:
+    CopisimPeriode: 2009
+    titre: Nice
+  Bobigny:
+    CopisimPeriode: 2009
+    titre: Paris Bobigny
+  Creteil:
+    CopisimPeriode: 2009
+    titre: Paris Cr√©eil
+  Descartes:
+    CopisimPeriode: 2009
+    titre: Paris Descartes
+  Bicetre:
+    CopisimPeriode: 2009
+    titre: Paris Kremlin-Bicetre
+  Ouest:
+    CopisimPeriode: 2009
+    titre: Paris Ouest
+  Antoine:
+    CopisimPeriode: 2009
+    titre: Paris Saint-Antoine
+  Pitie:
+    CopisimPeriode: 2009
+    titre: Paris Piti√-Salp√tri√re
+  VII:
+    CopisimPeriode: 2009
+    titre: Paris VII
+  Poitiers:
+    CopisimPeriode: 2009
+    titre: Poitiers
+  Reims:
+    CopisimPeriode: 2009
+    titre: Reims
+  Rennes:
+    CopisimPeriode: 2009
+    titre: Rennes
+  Rouen:
+    CopisimPeriode: 2009
+    titre: Rouen
+  Etienne:
+    CopisimPeriode: 2009
+    titre: Saint-Etienne
+  Strasbourg:
+    CopisimPeriode: 2009
+    titre: Strasbourg
+  Purpan:
+    CopisimPeriode: 2009
+    titre: Toulouse Purpan
+  Rangueil:
+    CopisimPeriode: 2009
+    titre: Toulouse Rangueil
+  Tours:
+    CopisimPeriode: 2009
+    titre: Tours
+  Europe:
+    CopisimPeriode: 2009
+    titre: Europe
+

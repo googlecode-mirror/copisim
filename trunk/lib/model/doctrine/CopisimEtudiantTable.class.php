@@ -24,4 +24,15 @@ class CopisimEtudiantTable extends Doctrine_Table
         return true;
     }
 
+    public function getListeQuery()
+    {
+      $q = Doctrine_Query::create()
+        ->from('CopisimEtudiant a')
+	->leftJoin('a.CopisimFac b')
+	->select('a.nom, a.prenom, a.anonyme, a.classement, b.titre')
+	->orderBy('a.classement asc');
+
+      return $q;
+    }
+
 }

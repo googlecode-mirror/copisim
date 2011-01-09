@@ -7,20 +7,20 @@
  * 
  * @property integer $etudiant
  * @property integer $poste
- * @property integer $complement
  * @property integer $ordre
- * @property CopisimItem $CopisimItem
+ * @property CopisimEtudiant $CopisimEtudiant
+ * @property CopisimPoste $CopisimPoste
  * 
- * @method integer      getEtudiant()    Returns the current record's "etudiant" value
- * @method integer      getPoste()       Returns the current record's "poste" value
- * @method integer      getComplement()  Returns the current record's "complement" value
- * @method integer      getOrdre()       Returns the current record's "ordre" value
- * @method CopisimItem  getCopisimItem() Returns the current record's "CopisimItem" value
- * @method CopisimChoix setEtudiant()    Sets the current record's "etudiant" value
- * @method CopisimChoix setPoste()       Sets the current record's "poste" value
- * @method CopisimChoix setComplement()  Sets the current record's "complement" value
- * @method CopisimChoix setOrdre()       Sets the current record's "ordre" value
- * @method CopisimChoix setCopisimItem() Sets the current record's "CopisimItem" value
+ * @method integer         getEtudiant()        Returns the current record's "etudiant" value
+ * @method integer         getPoste()           Returns the current record's "poste" value
+ * @method integer         getOrdre()           Returns the current record's "ordre" value
+ * @method CopisimEtudiant getCopisimEtudiant() Returns the current record's "CopisimEtudiant" value
+ * @method CopisimPoste    getCopisimPoste()    Returns the current record's "CopisimPoste" value
+ * @method CopisimChoix    setEtudiant()        Sets the current record's "etudiant" value
+ * @method CopisimChoix    setPoste()           Sets the current record's "poste" value
+ * @method CopisimChoix    setOrdre()           Sets the current record's "ordre" value
+ * @method CopisimChoix    setCopisimEtudiant() Sets the current record's "CopisimEtudiant" value
+ * @method CopisimChoix    setCopisimPoste()    Sets the current record's "CopisimPoste" value
  * 
  * @package    copisim
  * @subpackage model
@@ -40,21 +40,22 @@ abstract class BaseCopisimChoix extends sfDoctrineRecord
              'type' => 'integer',
              'notnull' => true,
              ));
-        $this->hasColumn('complement', 'integer', null, array(
+        $this->hasColumn('ordre', 'integer', 2, array(
              'type' => 'integer',
              'notnull' => true,
-             ));
-        $this->hasColumn('ordre', 'integer', null, array(
-             'type' => 'integer',
-             'notnull' => true,
+             'length' => 2,
              ));
     }
 
     public function setUp()
     {
         parent::setUp();
-        $this->hasOne('CopisimItem', array(
-             'local' => 'complement',
+        $this->hasOne('CopisimEtudiant', array(
+             'local' => 'etudiant',
+             'foreign' => 'classement'));
+
+        $this->hasOne('CopisimPoste', array(
+             'local' => 'poste',
              'foreign' => 'id'));
 
         $timestampable0 = new Doctrine_Template_Timestampable();

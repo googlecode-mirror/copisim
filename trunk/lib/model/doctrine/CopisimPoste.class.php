@@ -12,4 +12,8 @@
  */
 class CopisimPoste extends BaseCopisimPoste
 {
+  public function __toString()
+  {
+    return sprintf('%s a %s', $this->getCopisimFiliere()->getTitre(), $this->getCopisimRegion()->getTitre());
+  }
 }

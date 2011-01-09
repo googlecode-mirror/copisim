@@ -10,6 +10,21 @@
  * @author     Pierre-FrançoisPilouAngrand
  * @version    SVN: $Id: Builder.php 7490 2010-03-29 19:53:27Z jwage $
  */
+
 class CopisimChoix extends BaseCopisimChoix
 {
+  public function save(Doctrine_Connection $conn = null)
+	{
+		if(null === $this->getEtudiant())
+		  $this->setEtudiant(sfContext::getInstance()->getUser()->getGuardUser()->getUserName());
+
+		if(null === $this->getOrdre())
+		{
+			$this->setOrdre('1');
+			Doctrine::getTable('CopisimChoix')->cascadeEtudiantChoixDown($this->getEtudiant());
+		}
+
+		return parent::save($conn);
+	}
+
 }

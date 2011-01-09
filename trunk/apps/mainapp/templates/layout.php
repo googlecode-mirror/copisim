@@ -3,7 +3,7 @@
   <head>
     <?php include_http_metas() ?>
     <?php include_metas() ?>
-    <title><?php include_slot('title', 'GESSEH') ?></title>
+    <title><?php include_slot('title', 'COPIsim') ?></title>
     <link rel="shortcut icon" href="<?php echo $sf_request->getRelativeUrlRoot() ?>/images/favicon.ico" />
     <?php include_stylesheets() ?>
     <?php include_javascripts() ?>
@@ -18,9 +18,9 @@
 	    <li><a href="<?php echo url_for('@homepage') ?>">Accueil</a></li>
 	    <li><a href="<?php echo url_for('etudiant/index') ?>">Classement des ECN</a></li>
 	    <?php if ($sf_user->isAuthenticated()): ?>
-	      <li><a href="<?php echo url_for('choix/edit'); ?>">Mes choix</a></li>
+	      <li><a href="<?php echo url_for('etudiant/editchoix'); ?>">Mes choix</a></li>
 	      <li><a href="<?php echo url_for('choix/index'); ?>">Etat des postes</a></li>
-	      <li><a href="<?php echo url_for('choix/liste'); ?>">Simulation de choix</a></li>
+	      <li><a href="<?php echo url_for('choix/simul'); ?>">Simulation de choix</a></li>
 	      <li><a href="<?php echo url_for('etudiant/edit'); ?>">Mes paramètres</a></li>
 	      <li><?php echo link_to('Se déconnecter', 'sf_guard_signout'); ?></li>
 	    <?php else: ?>

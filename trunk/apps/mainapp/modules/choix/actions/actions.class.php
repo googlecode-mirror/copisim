@@ -12,9 +12,13 @@ class choixActions extends sfActions
 {
   public function executeIndex(sfWebRequest $request)
   {
-    $this->copisim_choixs = Doctrine::getTable('CopisimChoix')
-      ->createQuery('a')
-      ->execute();
+    $this->copisim_postes = Doctrine::getTable('CopisimPoste')->getPostesTableau($request->getParameter('periode'));
+		$this->copisim_regions = Doctrine::getTable('CopisimRegion')->getRegionsParPeriode($request->getParameter('periode'));
+		$this->copisim_filieres = Doctrine::getTable('CopisimFiliere')->getFilieresParPeriode($request->getParameter('periode'));
+  }
+
+  public function executeSimul(sfWebRequest $request)
+  {
   }
 
   public function executeShow(sfWebRequest $request)
@@ -54,16 +58,6 @@ class choixActions extends sfActions
     $this->processForm($request, $this->form);
 
     $this->setTemplate('edit');
-  }
-
-  public function executeDelete(sfWebRequest $request)
-  {
-    $request->checkCSRFProtection();
-
-    $this->forward404Unless($copisim_choix = Doctrine::getTable('CopisimChoix')->find(array($request->getParameter('id'))), sprintf('Object CopisimChoix does not exist (%s).', $request->getParameter('id')));
-    $copisim_choix->delete();
-
-    $this->redirect('choix/index');
   }
 
   protected function processForm(sfWebRequest $request, sfForm $form)
