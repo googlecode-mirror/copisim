@@ -8,22 +8,28 @@
  * @property year $annee
  * @property date $debut_choix
  * @property date $fin_choix
- * @property Doctrine_Collection $CopisimItem
+ * @property Doctrine_Collection $CopisimFac
+ * @property Doctrine_Collection $CopisimRegion
+ * @property Doctrine_Collection $CopisimFiliere
  * @property Doctrine_Collection $CopisimPoste
- * @property Doctrine_Collection $CopisimFlux
+ * @property Doctrine_Collection $CopisimReferent
  * 
- * @method year                getAnnee()        Returns the current record's "annee" value
- * @method date                getDebutChoix()   Returns the current record's "debut_choix" value
- * @method date                getFinChoix()     Returns the current record's "fin_choix" value
- * @method Doctrine_Collection getCopisimItem()  Returns the current record's "CopisimItem" collection
- * @method Doctrine_Collection getCopisimPoste() Returns the current record's "CopisimPoste" collection
- * @method Doctrine_Collection getCopisimFlux()  Returns the current record's "CopisimFlux" collection
- * @method CopisimPeriode      setAnnee()        Sets the current record's "annee" value
- * @method CopisimPeriode      setDebutChoix()   Sets the current record's "debut_choix" value
- * @method CopisimPeriode      setFinChoix()     Sets the current record's "fin_choix" value
- * @method CopisimPeriode      setCopisimItem()  Sets the current record's "CopisimItem" collection
- * @method CopisimPeriode      setCopisimPoste() Sets the current record's "CopisimPoste" collection
- * @method CopisimPeriode      setCopisimFlux()  Sets the current record's "CopisimFlux" collection
+ * @method year                getAnnee()           Returns the current record's "annee" value
+ * @method date                getDebutChoix()      Returns the current record's "debut_choix" value
+ * @method date                getFinChoix()        Returns the current record's "fin_choix" value
+ * @method Doctrine_Collection getCopisimFac()      Returns the current record's "CopisimFac" collection
+ * @method Doctrine_Collection getCopisimRegion()   Returns the current record's "CopisimRegion" collection
+ * @method Doctrine_Collection getCopisimFiliere()  Returns the current record's "CopisimFiliere" collection
+ * @method Doctrine_Collection getCopisimPoste()    Returns the current record's "CopisimPoste" collection
+ * @method Doctrine_Collection getCopisimReferent() Returns the current record's "CopisimReferent" collection
+ * @method CopisimPeriode      setAnnee()           Sets the current record's "annee" value
+ * @method CopisimPeriode      setDebutChoix()      Sets the current record's "debut_choix" value
+ * @method CopisimPeriode      setFinChoix()        Sets the current record's "fin_choix" value
+ * @method CopisimPeriode      setCopisimFac()      Sets the current record's "CopisimFac" collection
+ * @method CopisimPeriode      setCopisimRegion()   Sets the current record's "CopisimRegion" collection
+ * @method CopisimPeriode      setCopisimFiliere()  Sets the current record's "CopisimFiliere" collection
+ * @method CopisimPeriode      setCopisimPoste()    Sets the current record's "CopisimPoste" collection
+ * @method CopisimPeriode      setCopisimReferent() Sets the current record's "CopisimReferent" collection
  * 
  * @package    copisim
  * @subpackage model
@@ -52,7 +58,15 @@ abstract class BaseCopisimPeriode extends sfDoctrineRecord
     public function setUp()
     {
         parent::setUp();
-        $this->hasMany('CopisimItem', array(
+        $this->hasMany('CopisimFac', array(
+             'local' => 'id',
+             'foreign' => 'periode'));
+
+        $this->hasMany('CopisimRegion', array(
+             'local' => 'id',
+             'foreign' => 'periode'));
+
+        $this->hasMany('CopisimFiliere', array(
              'local' => 'id',
              'foreign' => 'periode'));
 
@@ -60,7 +74,7 @@ abstract class BaseCopisimPeriode extends sfDoctrineRecord
              'local' => 'id',
              'foreign' => 'periode'));
 
-        $this->hasMany('CopisimFlux', array(
+        $this->hasMany('CopisimReferent', array(
              'local' => 'id',
              'foreign' => 'periode'));
     }

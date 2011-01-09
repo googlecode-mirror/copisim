@@ -12,30 +12,36 @@
  * @property string $email
  * @property string $email_tmp
  * @property boolean $anonyme
- * @property boolean $doublant
+ * @property enum $annee
  * @property integer $classement
- * @property CopisimItem $CopisimItem
+ * @property CopisimFac $CopisimFac
+ * @property Doctrine_Collection $CopisimChoix
+ * @property Doctrine_Collection $CopisimMessage
  * 
- * @method string          getNom()         Returns the current record's "nom" value
- * @method string          getPrenom()      Returns the current record's "prenom" value
- * @method integer         getFac()         Returns the current record's "fac" value
- * @method date            getNaissance()   Returns the current record's "naissance" value
- * @method string          getEmail()       Returns the current record's "email" value
- * @method string          getEmailTmp()    Returns the current record's "email_tmp" value
- * @method boolean         getAnonyme()     Returns the current record's "anonyme" value
- * @method boolean         getDoublant()    Returns the current record's "doublant" value
- * @method integer         getClassement()  Returns the current record's "classement" value
- * @method CopisimItem     getCopisimItem() Returns the current record's "CopisimItem" value
- * @method CopisimEtudiant setNom()         Sets the current record's "nom" value
- * @method CopisimEtudiant setPrenom()      Sets the current record's "prenom" value
- * @method CopisimEtudiant setFac()         Sets the current record's "fac" value
- * @method CopisimEtudiant setNaissance()   Sets the current record's "naissance" value
- * @method CopisimEtudiant setEmail()       Sets the current record's "email" value
- * @method CopisimEtudiant setEmailTmp()    Sets the current record's "email_tmp" value
- * @method CopisimEtudiant setAnonyme()     Sets the current record's "anonyme" value
- * @method CopisimEtudiant setDoublant()    Sets the current record's "doublant" value
- * @method CopisimEtudiant setClassement()  Sets the current record's "classement" value
- * @method CopisimEtudiant setCopisimItem() Sets the current record's "CopisimItem" value
+ * @method string              getNom()            Returns the current record's "nom" value
+ * @method string              getPrenom()         Returns the current record's "prenom" value
+ * @method integer             getFac()            Returns the current record's "fac" value
+ * @method date                getNaissance()      Returns the current record's "naissance" value
+ * @method string              getEmail()          Returns the current record's "email" value
+ * @method string              getEmailTmp()       Returns the current record's "email_tmp" value
+ * @method boolean             getAnonyme()        Returns the current record's "anonyme" value
+ * @method enum                getAnnee()          Returns the current record's "annee" value
+ * @method integer             getClassement()     Returns the current record's "classement" value
+ * @method CopisimFac          getCopisimFac()     Returns the current record's "CopisimFac" value
+ * @method Doctrine_Collection getCopisimChoix()   Returns the current record's "CopisimChoix" collection
+ * @method Doctrine_Collection getCopisimMessage() Returns the current record's "CopisimMessage" collection
+ * @method CopisimEtudiant     setNom()            Sets the current record's "nom" value
+ * @method CopisimEtudiant     setPrenom()         Sets the current record's "prenom" value
+ * @method CopisimEtudiant     setFac()            Sets the current record's "fac" value
+ * @method CopisimEtudiant     setNaissance()      Sets the current record's "naissance" value
+ * @method CopisimEtudiant     setEmail()          Sets the current record's "email" value
+ * @method CopisimEtudiant     setEmailTmp()       Sets the current record's "email_tmp" value
+ * @method CopisimEtudiant     setAnonyme()        Sets the current record's "anonyme" value
+ * @method CopisimEtudiant     setAnnee()          Sets the current record's "annee" value
+ * @method CopisimEtudiant     setClassement()     Sets the current record's "classement" value
+ * @method CopisimEtudiant     setCopisimFac()     Sets the current record's "CopisimFac" value
+ * @method CopisimEtudiant     setCopisimChoix()   Sets the current record's "CopisimChoix" collection
+ * @method CopisimEtudiant     setCopisimMessage() Sets the current record's "CopisimMessage" collection
  * 
  * @package    copisim
  * @subpackage model
@@ -66,12 +72,12 @@ abstract class BaseCopisimEtudiant extends sfDoctrineRecord
              ));
         $this->hasColumn('email', 'string', 100, array(
              'type' => 'string',
-             'notnull' => true,
+             'notnull' => false,
              'length' => 100,
              ));
         $this->hasColumn('email_tmp', 'string', 100, array(
              'type' => 'string',
-             'notnull' => true,
+             'notnull' => false,
              'length' => 100,
              ));
         $this->hasColumn('anonyme', 'boolean', null, array(
@@ -79,10 +85,15 @@ abstract class BaseCopisimEtudiant extends sfDoctrineRecord
              'notnull' => true,
              'default' => 0,
              ));
-        $this->hasColumn('doublant', 'boolean', null, array(
-             'type' => 'boolean',
-             'notnull' => true,
-             'default' => 0,
+        $this->hasColumn('annee', 'enum', null, array(
+             'type' => 'enum',
+             'values' => 
+             array(
+              0 => 'DCEM4',
+              1 => 'DCEM4 doublant',
+              2 => 'TCEM1',
+             ),
+             'default' => 'DCEM4',
              ));
         $this->hasColumn('classement', 'integer', null, array(
              'type' => 'integer',
@@ -93,11 +104,28 @@ abstract class BaseCopisimEtudiant extends sfDoctrineRecord
     public function setUp()
     {
         parent::setUp();
-        $this->hasOne('CopisimItem', array(
+        $this->hasOne('CopisimFac', array(
              'local' => 'fac',
              'foreign' => 'id'));
 
-        $timestampable0 = new Doctrine_Template_Timestampable();
+        $this->hasMany('CopisimChoix', array(
+             'local' => 'classement',
+             'foreign' => 'etudiant'));
+
+        $this->hasMany('CopisimMessage', array(
+             'local' => 'id',
+             'foreign' => 'dest'));
+
+        $timestampable0 = new Doctrine_Template_Timestampable(array(
+             'created' => 
+             array(
+              'disabled' => true,
+             ),
+             'updated' => 
+             array(
+              'format' => 'Y-m-d',
+             ),
+             ));
         $this->actAs($timestampable0);
     }
 }

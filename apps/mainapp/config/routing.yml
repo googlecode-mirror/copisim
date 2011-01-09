@@ -4,13 +4,91 @@
 # default rules
 homepage:
   url:   /
+  param: { module: etudiant, action: index }
+
+sf_guard_signin:
+  url:   /login
+  param: { module: sfGuardAuth, action: signin }
+
+sf_guard_signout:
+  url:   /logout
+  param: { module: sfGuardAuth, action: signout }
+
+sf_guard_password:
+  url:   /request_password
+  param: { module: sfGuardAuth, action: password }
+
+etudiant_index_fac:
+  url: /referent/list
+  param: { module: etudiant, action: index }
+  requirements:
+    fac: \d+
+
+etudiant_index:
+  url: /etudiant
+  param: { module: etudiant, action: index }
+
+etudiant_index_pager:
+  url: /etudiant/:page
+  param: { module: etudiant, action: index }
+  requirements:
+    page: \d+
+
+etudiant_choix:
+  url: /etudiant/choix
+  param: { module: etudiant, action: editchoix }
+
+etudiant_updatechoix:
+  url: /etudiant/updatechoix
+  param: { module: etudiant, action: updatechoix }
+#  requirements:
+#    method: post
+
+etudiant_choixup:
+  url: /etudiant/choix/up/:up
+  param: { module: etudiant, action: editchoix }
+  requirements:
+    up: \d+
+
+etudiant_choixdown:
+  url: /etudiant/choix/del/:down
+  param: { module: etudiant, action: editchoix }
+  requirements:
+    down: \d+
+
+etudiant_choixdel:
+  url: /etudiant/choix/del/:del
+  param: { module: etudiant, action: editchoix }
+  requirements:
+    del: \d+
+
+
+etudiant_prefs:
+  url: /etudiant/infos
+  param: { module: etudiant, action: edit }
+
+etudiant_updateprefs:
+  url: /etudiant/updateinfos
+  param: { module: etudiant, action: update }
+#  requirements:
+#    method: post
+
+choix_repartition_0:
+  url: /choix/
   param: { module: choix, action: index }
 
-# generic rules
-# please, remove them by adding more specific rules
-default_index:
-  url:   /:module
-  param: { action: index }
+choix_repartition:
+  url: /choix/:periode
+  param: { module: choix, action: index }
+#  requirements:
+#    periode: \w+
 
-default:
-  url:   /:module/:action/*
+choix_liste_0:
+  url: /choix/simul
+  param: { module: choix, action: simul }
+
+choix_liste:
+  url: /choix/simul/:periode
+  param: { module: choix, action: simul }
+#  requirements:
+#    periode: \w+

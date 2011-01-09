@@ -1,37 +1,49 @@
 CopisimEtudiant:
   actAs:
-    Timestampable: ~
+    Timestampable: 
+      created: { disabled: true }
+      updated: { format: Y-m-d }
   columns:
     nom: { type: string(50), notnull: true }
     prenom: { type: string(50), notnull: true }
     fac: { type: integer, notnull: true }
     naissance: { type: date }
-    email: { type: string(100), notnull: true }
-    email_tmp: { type: string(100), notnull: true }
+    email: { type: string(100), notnull: false }
+    email_tmp: { type: string(100), notnull: false }
     anonyme: { type: boolean, notnull: true, default: 0 }
-    doublant: { type: boolean, notnull: true, default: 0 }
+    annee: { type: enum, values: ['DCEM4', 'DCEM4 doublant', 'TCEM1'], default: 'DCEM4' }
     classement: { type: integer, notnull: true }
   relations:
-    CopisimItem: { local: fac, foreign: id }
+    CopisimFac: { local: fac, foreign: id }
 
-CopisimItem:
-#  actAs:
+CopisimFac:
   columns:
     periode: { type: integer, notnull: true }
-    type: { type: string(20), notnull: true }
+    titre: { type: string(255), notnull: true }
+  relations:
+    CopisimPeriode: { local: periode, foreign: id }
+
+CopisimRegion:
+  columns:
+    periode: { type: integer, notnull: true }
+    titre: { type: string(255), notnull: true }
+  relations:
+    CopisimPeriode: { local: periode, foreign: id }
+
+CopisimFiliere:
+  columns:
+    periode: { type: integer, notnull: true }
     titre: { type: string(255), notnull: true }
   relations:
     CopisimPeriode: { local: periode, foreign: id }
 
 CopisimPeriode:
-#  actAs:
   columns:
     annee: { type: year, notnull: true }
     debut_choix: { type: date, notnull: true }
     fin_choix: { type: date, notnull: true }
 
 CopisimPoste:
-#  actAs:
   columns:
     periode: { type: integer, notnull: true }
     ville: { type: integer, notnull: true }
@@ -39,8 +51,8 @@ CopisimPoste:
     total: { type: integer, notnull: true }
   relations:
     CopisimPeriode: { local: periode, foreign: id }
-    CopisimItem: { local: ville, foreign: id }
-    CopisimItem: { local: filiere, foreign: id }
+    CopisimRegion: { local: ville, foreign: id }
+    CopisimFiliere: { local: filiere, foreign: id }
 
 CopisimChoix:
   actAs:
@@ -48,21 +60,32 @@ CopisimChoix:
   columns:
     etudiant: { type: integer, notnull: true }
     poste: { type: integer, notnull: true }
-    complement: { type: integer, notnull: true }
-    ordre: { type: integer, notnull: true }
+    ordre: { type: integer(2), notnull: true }
   relations:
-    copisim_poste: { local: poste, foreign: id }
-    CopisimItem: { local: complement, foreign: id }
+    CopisimEtudiant: { local: etudiant, foreign: classement }
+    CopisimPoste: { local: poste, foreign: id }
 
-CopisimFlux:
-#  actAs:
-    columns:
-      periode: { type: integer, notnull: true }
-      ville: { type: integer, notnull: true }
-      complement: { type: integer, notnull: true }
-      total: { type: integer, notnull: true }
-    relations:
-      CopisimPeriode: { local: periode, foreign: id }
-      CopisimItem: { local: ville, foreign: id }
-      CopisimItem: { local: complement, foreign: id }
+CopisimReferent:
+  columns:
+    periode: { type: integer, notnull: true }
+    nom: { type: string(50), notnull: true }
+    email: { type: string(100), notnull: true }
+    tel: { type: string(10), notnull: false }
+    divers: { type: string(256), notnull: false }
+    fac: { type: integer, notnull: true }
+  relations:
+    CopisimPeriode: { local: periode, foreign: id }
+    CopisimFac: { local: fac, foreign: id }
 
+CopisimMessage:
+  actAs:
+    Timestampable:
+      updated: { desactivated: true }
+  columns:
+    exp: { type: integer, notnull: true }
+    dest: { type: integer, notnull: true }
+    titre: { type: string(50), notnull: true }
+    texte: { type: string, notnull: true }
+  relations:
+    CopisimEtudiant: { local: exp, foreign: id }
+    CopisimEtudiant: { local: dest, foreign: id }

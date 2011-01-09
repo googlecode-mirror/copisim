@@ -1,273 +1,208 @@
-CopisimItem:
+CopisimRegion:
   1:
     CopisimPeriode: 2009
-    type: region
     titre: Aix-Marseille
   2:
     CopisimPeriode: 2009
-    type: region
     titre: Amiens
   3:
     CopisimPeriode: 2009
-    type: region
     titre: Angers
   4:
     CopisimPeriode: 2009
-    type: region
     titre: Antilles-Guyane
   5:
     CopisimPeriode: 2009
-    type: region
     titre: Besançon
   6:
     CopisimPeriode: 2009
-    type: region
     titre: Bordeaux
   7:
     CopisimPeriode: 2009
-    type: region
     titre: Brest
   8:
     CopisimPeriode: 2009
-    type: region
     titre: Caen
   9:
     CopisimPeriode: 2009
-    type: region
     titre: Clermont-Ferrand
   10:
     CopisimPeriode: 2009
-    type: region
     titre: Dijon
   11:
     CopisimPeriode: 2009
-    type: region
     titre: Grenoble
   12:
     CopisimPeriode: 2009
-    type: region
     titre: Ile-de-France
   13:
     CopisimPeriode: 2009
-    type: region
     titre: Lille
   14:
     CopisimPeriode: 2009
-    type: region
     titre: Limoges
   15:
     CopisimPeriode: 2009
-    type: region
     titre: Lyon
   16:
     CopisimPeriode: 2009
-    type: region
     titre: Montpellier-Nîmes
   17:
     CopisimPeriode: 2009
-    type: region
     titre: Nancy
   18:
     CopisimPeriode: 2009
-    type: region
     titre: Nantes
   19:
     CopisimPeriode: 2009
-    type: region
     titre: Nice
   20:
     CopisimPeriode: 2009
-    type: region
     titre: Océan Indien
   21:
     CopisimPeriode: 2009
-    type: region
     titre: Poitiers
   22:
     CopisimPeriode: 2009
-    type: region
     titre: Reims
   23:
     CopisimPeriode: 2009
-    type: region
     titre: Rennes
   24:
     CopisimPeriode: 2009
-    type: region
     titre: Rouen
   25:
     CopisimPeriode: 2009
-    type: region
     titre: Saint-Etienne
   26:
     CopisimPeriode: 2009
-    type: region
     titre: Strasbourg
   27:
     CopisimPeriode: 2009
-    type: region
     titre: Toulouse
   28:
     CopisimPeriode: 2009
-    type: region
     titre: Tours
+
+
+CopisimFiliere:
   29:
     CopisimPeriode: 2009
-    type: filiere
     titre: Anesthésie-Réanimation
   30:
     CopisimPeriode: 2009
-    type: filiere
     titre: Biologie Médicale
   31:
     CopisimPeriode: 2009
-    type: filiere
     titre: Gynécologie Médicale
   32:
     CopisimPeriode: 2009
-    type: filiere
     titre: Gynécologie Obstétrique
   33:
     CopisimPeriode: 2009
-    type: filiere
     titre: Médecine Générale
   34:
     CopisimPeriode: 2009
-    type: filiere
     titre: Médecine du Travail
   35:
     CopisimPeriode: 2009
-    type: filiere
     titre: Psychiatrie
   36:
     CopisimPeriode: 2009
-    type: filiere
     titre: Pédiatrie
   37:
     CopisimPeriode: 2009
-    type: filiere
     titre: Santé Publique
   38:
     CopisimPeriode: 2009
-    type: filiere
     titre: Spécialités Chirurgicales
   39:
     CopisimPeriode: 2009
-    type: filiere
     titre: Spécialités Médicales
   70:
     CopisimPeriode: 2009
-    type: med
     titre: Anatomie et cytologie pathologiques
   71:
     CopisimPeriode: 2009
-    type: med
     titre: Cardiologie et maladies vasculaires
   72:
     CopisimPeriode: 2009
-    type: med
     titre: Dermatologie et vénéréologie
   73:
     CopisimPeriode: 2009
-    type: med
     titre: Endocrinologie et métabolisme
   74:
     CopisimPeriode: 2009
-    type: med
     titre: Gastro-entérologie et hépatologie
   75:
     CopisimPeriode: 2009
-    type: med
     titre: Hématologie
   76:
     CopisimPeriode: 2009
-    type: med
     titre: Médecine interne
   77:
     CopisimPeriode: 2009
-    type: med
     titre: Médecine nucléaire
   78:
     CopisimPeriode: 2009
-    type: med
     titre: Médecine physique et de réadaptation
   79:
     CopisimPeriode: 2009
-    type: med
     titre: Néphrologie
   80:
     CopisimPeriode: 2009
-    type: med
     titre: Oncologie
   81:
     CopisimPeriode: 2009
-    type: med
     titre: Pathologies cardio-vasculaires
   82:
     CopisimPeriode: 2009
-    type: med
     titre: Pneumologie
   83:
     CopisimPeriode: 2009
-    type: med
     titre: Radiodiagnostic et imagerie médicale
   84:
     CopisimPeriode: 2009
-    type: med
     titre: Rhumatologie
   99:
     CopisimPeriode: 2009
-    type: med
     titre: Génétique médicale
   86:
     CopisimPeriode: 2009
-    type: chir
     titre: Neurochirurgie
   87:
     CopisimPeriode: 2009
-    type: chir
     titre: Ophtalmologie
   88:
     CopisimPeriode: 2009
-    type: chir
     titre: Oto-rhino-laryngologie et chirurgie cervico-faciale
   89:
     CopisimPeriode: 2009
-    type: chir
     titre: Stomatologie
   90:
     CopisimPeriode: 2009
-    type: med
     titre: Neurologie
   91:
     CopisimPeriode: 2009
-    type: chir
     titre: Chirurgie infantile (chirurgie générale)
   92:
     CopisimPeriode: 2009
-    type: chir
     titre: Chirurgie maxillo-faciale et stomatologie (chirurgie générale)
   93:
     CopisimPeriode: 2009
-    type: chir
     titre: Chirurgie orthopédique et traumatologie (chirurgie générale)
   94:
     CopisimPeriode: 2009
-    type: chir
     titre: Chirurgie plastique reconstructrice et esthétique (chirurgie générale)
   95:
     CopisimPeriode: 2009
-    type: chir
     titre: Chirurgie thoracique et cardio-vasculaire (chirurgie générale)
   96:
     CopisimPeriode: 2009
-    type: chir
     titre: Chirurgie urologique (chirurgie générale)
   97:
     CopisimPeriode: 2009
-    type: chir
     titre: Chirurgie vasculaire (chirurgie générale)
   98:
     CopisimPeriode: 2009
-    type: chir
     titre: Chirurgie viscérale et digestive (chirurgie générale)

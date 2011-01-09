@@ -17,16 +17,16 @@ abstract class BaseCopisimFluxForm extends BaseFormDoctrine
     $this->setWidgets(array(
       'id'         => new sfWidgetFormInputHidden(),
       'periode'    => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('CopisimPeriode'), 'add_empty' => false)),
-      'ville'      => new sfWidgetFormInputText(),
-      'complement' => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('CopisimItem'), 'add_empty' => false)),
+      'ville'      => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('CopisimRegion'), 'add_empty' => false)),
+      'complement' => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('CopisimFiliere'), 'add_empty' => false)),
       'total'      => new sfWidgetFormInputText(),
     ));
 
     $this->setValidators(array(
       'id'         => new sfValidatorDoctrineChoice(array('model' => $this->getModelName(), 'column' => 'id', 'required' => false)),
       'periode'    => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('CopisimPeriode'))),
-      'ville'      => new sfValidatorInteger(),
-      'complement' => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('CopisimItem'))),
+      'ville'      => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('CopisimRegion'))),
+      'complement' => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('CopisimFiliere'))),
       'total'      => new sfValidatorInteger(),
     ));
 

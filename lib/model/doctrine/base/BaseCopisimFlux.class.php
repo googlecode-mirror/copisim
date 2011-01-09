@@ -10,20 +10,23 @@
  * @property integer $complement
  * @property integer $total
  * @property CopisimPeriode $CopisimPeriode
- * @property CopisimItem $CopisimItem
+ * @property CopisimRegion $CopisimRegion
+ * @property CopisimFiliere $CopisimFiliere
  * 
  * @method integer        getPeriode()        Returns the current record's "periode" value
  * @method integer        getVille()          Returns the current record's "ville" value
  * @method integer        getComplement()     Returns the current record's "complement" value
  * @method integer        getTotal()          Returns the current record's "total" value
  * @method CopisimPeriode getCopisimPeriode() Returns the current record's "CopisimPeriode" value
- * @method CopisimItem    getCopisimItem()    Returns the current record's "CopisimItem" value
+ * @method CopisimRegion  getCopisimRegion()  Returns the current record's "CopisimRegion" value
+ * @method CopisimFiliere getCopisimFiliere() Returns the current record's "CopisimFiliere" value
  * @method CopisimFlux    setPeriode()        Sets the current record's "periode" value
  * @method CopisimFlux    setVille()          Sets the current record's "ville" value
  * @method CopisimFlux    setComplement()     Sets the current record's "complement" value
  * @method CopisimFlux    setTotal()          Sets the current record's "total" value
  * @method CopisimFlux    setCopisimPeriode() Sets the current record's "CopisimPeriode" value
- * @method CopisimFlux    setCopisimItem()    Sets the current record's "CopisimItem" value
+ * @method CopisimFlux    setCopisimRegion()  Sets the current record's "CopisimRegion" value
+ * @method CopisimFlux    setCopisimFiliere() Sets the current record's "CopisimFiliere" value
  * 
  * @package    copisim
  * @subpackage model
@@ -60,7 +63,11 @@ abstract class BaseCopisimFlux extends sfDoctrineRecord
              'local' => 'periode',
              'foreign' => 'id'));
 
-        $this->hasOne('CopisimItem', array(
+        $this->hasOne('CopisimRegion', array(
+             'local' => 'ville',
+             'foreign' => 'id'));
+
+        $this->hasOne('CopisimFiliere', array(
              'local' => 'complement',
              'foreign' => 'id'));
     }

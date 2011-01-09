@@ -15,28 +15,26 @@ abstract class BaseCopisimEtudiantFormFilter extends BaseFormFilterDoctrine
     $this->setWidgets(array(
       'nom'        => new sfWidgetFormFilterInput(array('with_empty' => false)),
       'prenom'     => new sfWidgetFormFilterInput(array('with_empty' => false)),
-      'fac'        => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('CopisimItem'), 'add_empty' => true)),
+      'fac'        => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('CopisimFac'), 'add_empty' => true)),
       'naissance'  => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate())),
-      'email'      => new sfWidgetFormFilterInput(array('with_empty' => false)),
-      'email_tmp'  => new sfWidgetFormFilterInput(array('with_empty' => false)),
+      'email'      => new sfWidgetFormFilterInput(),
+      'email_tmp'  => new sfWidgetFormFilterInput(),
       'anonyme'    => new sfWidgetFormChoice(array('choices' => array('' => 'yes or no', 1 => 'yes', 0 => 'no'))),
-      'doublant'   => new sfWidgetFormChoice(array('choices' => array('' => 'yes or no', 1 => 'yes', 0 => 'no'))),
-      'classement' => new sfWidgetFormFilterInput(array('with_empty' => false)),
-      'created_at' => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate(), 'with_empty' => false)),
+      'annee'      => new sfWidgetFormChoice(array('choices' => array('' => '', 'DCEM4' => 'DCEM4', 'DCEM4 doublant' => 'DCEM4 doublant', 'TCEM1' => 'TCEM1'))),
+      'classement' => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('CopisimChoix'), 'add_empty' => true)),
       'updated_at' => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate(), 'with_empty' => false)),
     ));
 
     $this->setValidators(array(
       'nom'        => new sfValidatorPass(array('required' => false)),
       'prenom'     => new sfValidatorPass(array('required' => false)),
-      'fac'        => new sfValidatorDoctrineChoice(array('required' => false, 'model' => $this->getRelatedModelName('CopisimItem'), 'column' => 'id')),
+      'fac'        => new sfValidatorDoctrineChoice(array('required' => false, 'model' => $this->getRelatedModelName('CopisimFac'), 'column' => 'id')),
       'naissance'  => new sfValidatorDateRange(array('required' => false, 'from_date' => new sfValidatorDate(array('required' => false)), 'to_date' => new sfValidatorDateTime(array('required' => false)))),
       'email'      => new sfValidatorPass(array('required' => false)),
       'email_tmp'  => new sfValidatorPass(array('required' => false)),
       'anonyme'    => new sfValidatorChoice(array('required' => false, 'choices' => array('', 1, 0))),
-      'doublant'   => new sfValidatorChoice(array('required' => false, 'choices' => array('', 1, 0))),
-      'classement' => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
-      'created_at' => new sfValidatorDateRange(array('required' => false, 'from_date' => new sfValidatorDateTime(array('required' => false, 'datetime_output' => 'Y-m-d 00:00:00')), 'to_date' => new sfValidatorDateTime(array('required' => false, 'datetime_output' => 'Y-m-d 23:59:59')))),
+      'annee'      => new sfValidatorChoice(array('required' => false, 'choices' => array('DCEM4' => 'DCEM4', 'DCEM4 doublant' => 'DCEM4 doublant', 'TCEM1' => 'TCEM1'))),
+      'classement' => new sfValidatorDoctrineChoice(array('required' => false, 'model' => $this->getRelatedModelName('CopisimChoix'), 'column' => 'id')),
       'updated_at' => new sfValidatorDateRange(array('required' => false, 'from_date' => new sfValidatorDateTime(array('required' => false, 'datetime_output' => 'Y-m-d 00:00:00')), 'to_date' => new sfValidatorDateTime(array('required' => false, 'datetime_output' => 'Y-m-d 23:59:59')))),
     ));
 
@@ -65,9 +63,8 @@ abstract class BaseCopisimEtudiantFormFilter extends BaseFormFilterDoctrine
       'email'      => 'Text',
       'email_tmp'  => 'Text',
       'anonyme'    => 'Boolean',
-      'doublant'   => 'Boolean',
-      'classement' => 'Number',
-      'created_at' => 'Date',
+      'annee'      => 'Enum',
+      'classement' => 'ForeignKey',
       'updated_at' => 'Date',
     );
   }

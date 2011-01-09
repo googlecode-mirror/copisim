@@ -1,38 +1,53 @@
-<h1>Copisim etudiants List</h1>
+<h1>Liste des étudiants</h1>
 
 <table>
   <thead>
     <tr>
-      <th>Id</th>
-      <th>Nom</th>
-      <th>Prenom</th>
-      <th>Fac</th>
-      <th>Naissance</th>
-      <th>Email</th>
-      <th>Anonyme</th>
-      <th>Doublant</th>
       <th>Classement</th>
-      <th>Created at</th>
-      <th>Updated at</th>
+      <th>Nom</th>
+      <th>Faculté</th>
     </tr>
   </thead>
   <tbody>
-    <?php foreach ($copisim_etudiants as $copisim_etudiant): ?>
+    <?php foreach($pager->getResults() as $copisim_etudiant): ?>
     <tr>
-      <td><a href="<?php echo url_for('etudiant/show?id='.$copisim_etudiant->getId()) ?>"><?php echo $copisim_etudiant->getId() ?></a></td>
-      <td><?php echo $copisim_etudiant->getNom() ?></td>
-      <td><?php echo $copisim_etudiant->getPrenom() ?></td>
-      <td><?php echo $copisim_etudiant->getFac() ?></td>
-      <td><?php echo $copisim_etudiant->getNaissance() ?></td>
-      <td><?php echo $copisim_etudiant->getEmail() ?></td>
-      <td><?php echo $copisim_etudiant->getAnonyme() ?></td>
-      <td><?php echo $copisim_etudiant->getDoublant() ?></td>
       <td><?php echo $copisim_etudiant->getClassement() ?></td>
-      <td><?php echo $copisim_etudiant->getCreatedAt() ?></td>
-      <td><?php echo $copisim_etudiant->getUpdatedAt() ?></td>
+      <td>
+        <?php if($copisim_etudiant->getAnonyme()): ?>
+          ***anonyme***
+        <?php else: ?>
+	  <?php echo $copisim_etudiant->getNom()." ".$copisim_etudiant->getPrenom() ?>
+	<?php endif; ?>
+      </td>
+      <td><?php echo $copisim_etudiant->getCopisimFac()->getTitre(); ?></td>
     </tr>
     <?php endforeach; ?>
   </tbody>
 </table>
 
-  <a href="<?php echo url_for('etudiant/new') ?>">New</a>
+<?php if ($pager->haveToPaginate()): ?>
+  <div class="pagination">
+    <a href="<?php echo url_for('etudiant/index'); ?>?page=1"><<</a>
+    <a href="<?php echo url_for('etudiant/index'); ?>?page=<?php echo $pager->getPreviousPage() ?>"><</a>
+    
+    <?php foreach ($pager->getLinks() as $page): ?>
+      <?php if ($page == $pager->getPage()): ?>
+        <?php echo $page ?>
+      <?php else: ?>
+        <a href="<?php echo url_for('etudiant/index'); ?>?page=<?php echo $page ?>"><?php echo $page ?></a>
+      <?php endif; ?>
+    <?php endforeach; ?>
+    
+    <a href="<?php echo url_for('etudiant/index'); ?>?page=<?php echo $pager->getNextPage() ?>">></a>
+    
+    <a href="<?php echo url_for('etudiant/index'); ?>?page=<?php echo $pager->getLastPage() ?>">>></aa>
+  </div>
+<?php endif; ?>
+
+<div class="pagination_desc">
+  <strong><?php echo count($pager) ?></strong> étudiants classés
+  
+  <?php if ($pager->haveToPaginate()): ?>
+    - page <strong><?php echo $pager->getPage() ?>/<?php echo $pager->getLastPage() ?></strong>
+  <?php endif; ?>
+</div>

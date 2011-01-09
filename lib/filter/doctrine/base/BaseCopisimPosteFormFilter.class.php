@@ -14,15 +14,15 @@ abstract class BaseCopisimPosteFormFilter extends BaseFormFilterDoctrine
   {
     $this->setWidgets(array(
       'periode' => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('CopisimPeriode'), 'add_empty' => true)),
-      'ville'   => new sfWidgetFormFilterInput(array('with_empty' => false)),
-      'filiere' => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('CopisimItem'), 'add_empty' => true)),
+      'ville'   => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('CopisimRegion'), 'add_empty' => true)),
+      'filiere' => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('CopisimFiliere'), 'add_empty' => true)),
       'total'   => new sfWidgetFormFilterInput(array('with_empty' => false)),
     ));
 
     $this->setValidators(array(
       'periode' => new sfValidatorDoctrineChoice(array('required' => false, 'model' => $this->getRelatedModelName('CopisimPeriode'), 'column' => 'id')),
-      'ville'   => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
-      'filiere' => new sfValidatorDoctrineChoice(array('required' => false, 'model' => $this->getRelatedModelName('CopisimItem'), 'column' => 'id')),
+      'ville'   => new sfValidatorDoctrineChoice(array('required' => false, 'model' => $this->getRelatedModelName('CopisimRegion'), 'column' => 'id')),
+      'filiere' => new sfValidatorDoctrineChoice(array('required' => false, 'model' => $this->getRelatedModelName('CopisimFiliere'), 'column' => 'id')),
       'total'   => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
     ));
 
@@ -45,7 +45,7 @@ abstract class BaseCopisimPosteFormFilter extends BaseFormFilterDoctrine
     return array(
       'id'      => 'Number',
       'periode' => 'ForeignKey',
-      'ville'   => 'Number',
+      'ville'   => 'ForeignKey',
       'filiere' => 'ForeignKey',
       'total'   => 'Number',
     );
