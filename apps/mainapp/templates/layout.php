@@ -17,10 +17,11 @@
 	  <ul>
 	    <li><a href="<?php echo url_for('@homepage') ?>">Accueil</a></li>
 	    <li><a href="<?php echo url_for('etudiant/index') ?>">Classement des ECN</a></li>
+			<li><a href="<?php echo url_for('choix/index') ?>">Répartition des postes</a></li>
 	    <?php if ($sf_user->isAuthenticated()): ?>
 	      <li><a href="<?php echo url_for('etudiant/editchoix'); ?>">Mes choix</a></li>
-	      <li><a href="<?php echo url_for('choix/index'); ?>">Etat des postes</a></li>
-	      <li><a href="<?php echo url_for('choix/simul'); ?>">Simulation de choix</a></li>
+	      <li><a href="<?php echo url_for('choix/simul'); ?>">Etat des postes</a></li>
+	      <li><a href="<?php echo url_for('choix/index'); ?>">Simulation pondérée</a></li>
 	      <li><a href="<?php echo url_for('etudiant/edit'); ?>">Mes paramètres</a></li>
 	      <li><?php echo link_to('Se déconnecter', 'sf_guard_signout'); ?></li>
 	    <?php else: ?>
