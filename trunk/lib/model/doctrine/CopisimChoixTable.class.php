@@ -104,4 +104,69 @@ class CopisimChoixTable extends Doctrine_Table
 				->where('a.etudiant = ?', $etudiant)
 				->execute();
 		}
+
+		public function simulChoix($periode, $classement_etudiant = null)
+		{
+			$postes = Doctrine::getTable('CopisimPostes')->getPostesTableau($periode);
+
+			$q = Doctrine_Query::create()
+			  ->from('CopisimChoix a')
+				->leftJoin('a.CopisimEtudiant b')
+				->leftJoin('b.CopisimPoste c')
+				->orderBy('b.classement asc, a.ordre asc');
+
+			$r = Doctrine_Query::create()
+			  ->from('CopisimEtudiant a')
+				->select('a.classement')
+				->where('')
+				->orderBy('a.classement asc');
+
+			if(null !== $classement_etudiant)
+			{
+				$q->where('b.classement <= ?', $classement_etudiant);
+				$r->andWhere('a.classemnet <= ?', $classement_etudiant);
+			}
+
+			$choixs = $q->execute();
+			$etudiants = $r->execute();
+
+//			$prev = '';
+			$choix_etudiant = array();
+
+			foreach($choixs as $choix)
+			{
+				if(null !== $choix_etudiant[$choix->getCopisimEtudiant()->getClassement()])
+					continue;
+
+				if($postes[$choix->getCopisimPoste()->getFiliere()][$choix->getCopisimPoste()->getVille()] > 0)
+				{
+					$postes[$choix->getCopisimPoste()->getFiliere()][$choix->getCopisimPoste()->getVille()]--;
+					$choix_etudiant[$choix->getCopisimEtudiant()->getClassement()] = $choix->getCopisimPoste()->getFiliere()." à ".$choix->getCopisimPoste()->getVille();
+//					$prev = $choix->getCopisimEtudiant()->getClassement();
+					continue;
+				}
+			}
+
+			foreach($etudiants as $etudiant)
+			{
+				if(null === $choix_etudiant[$etudiant->getClassement()])
+					$choix_etudiant[$etudiant->getClassement()] = "Aucun choix valide";
+			}
+			
+			$tableau = array();
+			$tableau['postes'] = $postes;
+			$tableau['choix'] = $choix_etudiant;
+			$tableau['absent'] = $this->countAbsentDesChoix($choix_etudiant);
+
+  		return $tableau;
+		}
+
+    private function countAbsentDesChoix($choix)
+		{
+			$tableau = array();
+
+			$count = array_count_array($choix);
+
+			return $count['Aucun choix valide'];
+		}
 }
