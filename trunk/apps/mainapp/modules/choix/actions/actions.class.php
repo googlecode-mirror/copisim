@@ -12,9 +12,14 @@ class choixActions extends sfActions
 {
   public function executeIndex(sfWebRequest $request)
   {
-    $this->copisim_postes = Doctrine::getTable('CopisimPoste')->getPostesTableau($request->getParameter('periode'));
-		$this->copisim_regions = Doctrine::getTable('CopisimRegion')->getRegionsParPeriode($request->getParameter('periode'));
-		$this->copisim_filieres = Doctrine::getTable('CopisimFiliere')->getFilieresParPeriode($request->getParameter('periode'));
+		if(null === $request->getParameter('periode'))
+			$periode = '2009';
+		else
+			$periode = $request->getParameter('periode');
+
+    $this->copisim_postes = Doctrine::getTable('CopisimPoste')->getPostesTableau($periode);
+		$this->copisim_regions = Doctrine::getTable('CopisimRegion')->getRegionsParPeriode($periode);
+		$this->copisim_filieres = Doctrine::getTable('CopisimFiliere')->getFilieresParPeriode($periode);
   }
 
   public function executeSimul(sfWebRequest $request)
