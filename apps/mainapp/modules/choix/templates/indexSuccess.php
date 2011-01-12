@@ -16,8 +16,8 @@
 		  <?php foreach ($copisim_filieres as $filiere): ?>
       <td>
 			  <?php 
-				  if(null !== $copisim_postes[$filiere->getId()][$region->getId()]):
-						echo $copisim_postes[$filiere->getId()][$region->getId()];
+				  if(null !== $copisim_postes[$filiere->getTitre()][$region->getTitre()]):
+						echo $copisim_postes[$filiere->getTitre()][$region->getTitre()];
 					else:
 						echo '0';
 					endif;
