@@ -1,5 +1,7 @@
 <h1>Mes choix :</h1>
 
+<div>Votre choix retenu par la simulation est : <em><?php echo $monchoix; ?></em>. Après vous, il reste encore <em><?php echo $monposte; ?> places</em> pour ce poste. Attention, <em><?php echo $simul_absents; ?> personnes</em> n'ont pas de choix valide avant vous, et donc votre choix retenu peut encore varier avant la fin de la simulation.</div>
+
 <div>
   <?php 
 	  $n = 1;
