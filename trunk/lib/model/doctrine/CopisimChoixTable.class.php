@@ -107,56 +107,61 @@ class CopisimChoixTable extends Doctrine_Table
 
 		public function simulChoix($periode, $classement_etudiant = null)
 		{
-			$postes = Doctrine::getTable('CopisimPostes')->getPostesTableau($periode);
+			$postes = Doctrine::getTable('CopisimPoste')->getPostesTableau($periode);
 
 			$q = Doctrine_Query::create()
 			  ->from('CopisimChoix a')
 				->leftJoin('a.CopisimEtudiant b')
-				->leftJoin('b.CopisimPoste c')
+				->leftJoin('a.CopisimPoste c')
+				->leftJoin('c.CopisimRegion d')
+				->leftJoin('c.CopisimFiliere e')
 				->orderBy('b.classement asc, a.ordre asc');
 
 			$r = Doctrine_Query::create()
 			  ->from('CopisimEtudiant a')
 				->select('a.classement')
-				->where('')
+				->where('true')  // Retire de la requète les situations particulières de non participation à la simulation
 				->orderBy('a.classement asc');
 
 			if(null !== $classement_etudiant)
 			{
 				$q->where('b.classement <= ?', $classement_etudiant);
-				$r->andWhere('a.classemnet <= ?', $classement_etudiant);
+				$r->andWhere('a.classement <= ?', $classement_etudiant);
 			}
 
 			$choixs = $q->execute();
 			$etudiants = $r->execute();
 
-//			$prev = '';
+			$prev = '';
 			$choix_etudiant = array();
+			foreach($etudiants as $etudiant)
+			  $choix_etudiant[$etudiant->getClassement()] = "Aucun choix valide";
+
 
 			foreach($choixs as $choix)
 			{
-				if(null !== $choix_etudiant[$choix->getCopisimEtudiant()->getClassement()])
+				if($prev === $choix->getCopisimEtudiant()->getClassement())
 					continue;
 
-				if($postes[$choix->getCopisimPoste()->getFiliere()][$choix->getCopisimPoste()->getVille()] > 0)
+				if($postes[$choix->getCopisimPoste()->getCopisimFiliere()->getTitre()][$choix->getCopisimPoste()->getCopisimRegion()->getTitre()] > 0)
 				{
-					$postes[$choix->getCopisimPoste()->getFiliere()][$choix->getCopisimPoste()->getVille()]--;
-					$choix_etudiant[$choix->getCopisimEtudiant()->getClassement()] = $choix->getCopisimPoste()->getFiliere()." à ".$choix->getCopisimPoste()->getVille();
-//					$prev = $choix->getCopisimEtudiant()->getClassement();
+					$postes[$choix->getCopisimPoste()->getCopisimFiliere()->getTitre()][$choix->getCopisimPoste()->getCopisimRegion()->getTitre()]--;
+					$choix_etudiant[$choix->getCopisimEtudiant()->getClassement()] = $choix->getCopisimPoste()->getCopisimFiliere()->getTitre()." à ".$choix->getCopisimPoste()->getCopisimRegion()->getTitre();
+					$prev = $choix->getCopisimEtudiant()->getClassement();
 					continue;
 				}
 			}
 
-			foreach($etudiants as $etudiant)
-			{
-				if(null === $choix_etudiant[$etudiant->getClassement()])
-					$choix_etudiant[$etudiant->getClassement()] = "Aucun choix valide";
-			}
+//			foreach($etudiants as $etudiant)
+//			{
+//				if(null === $choix_etudiant[$etudiant->getClassement()])
+//					$choix_etudiant[$etudiant->getClassement()] = "Aucun choix valide";
+//			}
 			
 			$tableau = array();
 			$tableau['postes'] = $postes;
 			$tableau['choix'] = $choix_etudiant;
-			$tableau['absent'] = $this->countAbsentDesChoix($choix_etudiant);
+			$tableau['absents'] = $this->countAbsentDesChoix($choix_etudiant);
 
   		return $tableau;
 		}
@@ -165,7 +170,7 @@ class CopisimChoixTable extends Doctrine_Table
 		{
 			$tableau = array();
 
-			$count = array_count_array($choix);
+			$count = array_count_values($choix);
 
 			return $count['Aucun choix valide'];
 		}

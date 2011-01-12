@@ -28,7 +28,7 @@ class CopisimPosteTable extends Doctrine_Table
 			$tableau = array();
 
 			foreach($object as $poste)
-				$tableau[$poste->getFiliere()][$poste->getVille()] = $poste->getTotal();
+				$tableau[$poste->getCopisimFiliere()->getTitre()][$poste->getCopisimRegion()->getTitre()] = $poste->getTotal();
 
 			return $tableau;
 		}			
