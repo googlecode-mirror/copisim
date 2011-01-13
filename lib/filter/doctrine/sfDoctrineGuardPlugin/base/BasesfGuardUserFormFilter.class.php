@@ -6,13 +6,16 @@
  * @package    copisim
  * @subpackage filter
  * @author     Pierre-FrançoisPilouAngrand
- * @version    SVN: $Id: sfDoctrineFormFilterGeneratedTemplate.php 24171 2009-11-19 16:37:50Z Kris.Wallsmith $
+ * @version    SVN: $Id: sfDoctrineFormFilterGeneratedTemplate.php 29570 2010-05-21 14:49:47Z Kris.Wallsmith $
  */
 abstract class BasesfGuardUserFormFilter extends BaseFormFilterDoctrine
 {
   public function setup()
   {
     $this->setWidgets(array(
+      'first_name'       => new sfWidgetFormFilterInput(),
+      'last_name'        => new sfWidgetFormFilterInput(),
+      'email_address'    => new sfWidgetFormFilterInput(array('with_empty' => false)),
       'username'         => new sfWidgetFormFilterInput(array('with_empty' => false)),
       'algorithm'        => new sfWidgetFormFilterInput(array('with_empty' => false)),
       'salt'             => new sfWidgetFormFilterInput(),
@@ -27,6 +30,9 @@ abstract class BasesfGuardUserFormFilter extends BaseFormFilterDoctrine
     ));
 
     $this->setValidators(array(
+      'first_name'       => new sfValidatorPass(array('required' => false)),
+      'last_name'        => new sfValidatorPass(array('required' => false)),
+      'email_address'    => new sfValidatorPass(array('required' => false)),
       'username'         => new sfValidatorPass(array('required' => false)),
       'algorithm'        => new sfValidatorPass(array('required' => false)),
       'salt'             => new sfValidatorPass(array('required' => false)),
@@ -61,8 +67,10 @@ abstract class BasesfGuardUserFormFilter extends BaseFormFilterDoctrine
       return;
     }
 
-    $query->leftJoin('r.sfGuardUserGroup sfGuardUserGroup')
-          ->andWhereIn('sfGuardUserGroup.group_id', $values);
+    $query
+      ->leftJoin($query->getRootAlias().'.sfGuardUserGroup sfGuardUserGroup')
+      ->andWhereIn('sfGuardUserGroup.group_id', $values)
+    ;
   }
 
   public function addPermissionsListColumnQuery(Doctrine_Query $query, $field, $values)
@@ -77,8 +85,10 @@ abstract class BasesfGuardUserFormFilter extends BaseFormFilterDoctrine
       return;
     }
 
-    $query->leftJoin('r.sfGuardUserPermission sfGuardUserPermission')
-          ->andWhereIn('sfGuardUserPermission.permission_id', $values);
+    $query
+      ->leftJoin($query->getRootAlias().'.sfGuardUserPermission sfGuardUserPermission')
+      ->andWhereIn('sfGuardUserPermission.permission_id', $values)
+    ;
   }
 
   public function getModelName()
@@ -90,6 +100,9 @@ abstract class BasesfGuardUserFormFilter extends BaseFormFilterDoctrine
   {
     return array(
       'id'               => 'Number',
+      'first_name'       => 'Text',
+      'last_name'        => 'Text',
+      'email_address'    => 'Text',
       'username'         => 'Text',
       'algorithm'        => 'Text',
       'salt'             => 'Text',
