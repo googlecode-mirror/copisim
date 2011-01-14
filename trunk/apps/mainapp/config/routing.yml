@@ -77,9 +77,9 @@ choix_repartition_0:
   url: /choix/
   param: { module: choix, action: index }
 
-choix_repartition:
-  url: /choix/:periode
-  param: { module: choix, action: index }
+#choix_repartition:
+#  url: /choix/:periode
+#  param: { module: choix, action: index }
 #  requirements:
 #    periode: \w+
 
@@ -87,8 +87,8 @@ choix_liste_0:
   url: /choix/simul
   param: { module: choix, action: simul }
 
-choix_liste:
-  url: /choix/simul/:periode
-  param: { module: choix, action: simul }
+#choix_liste:
+#  url: /choix/simul/:periode
+#  param: { module: choix, action: simul }
 #  requirements:
 #    periode: \w+
