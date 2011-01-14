@@ -2,7 +2,6 @@ CREATE TABLE copisim_choix (id BIGINT AUTO_INCREMENT, etudiant BIGINT NOT NULL, 
 CREATE TABLE copisim_etudiant (id BIGINT AUTO_INCREMENT, nom VARCHAR(50) NOT NULL, prenom VARCHAR(50) NOT NULL, fac BIGINT NOT NULL, naissance DATE, email VARCHAR(100), email_tmp VARCHAR(100), anonyme TINYINT(1) DEFAULT '0' NOT NULL, annee VARCHAR(255) DEFAULT 'DCEM4', classement BIGINT NOT NULL, updated_at DATETIME NOT NULL, INDEX classement_idx (classement), INDEX fac_idx (fac), PRIMARY KEY(id)) ENGINE = INNODB;
 CREATE TABLE copisim_fac (id BIGINT AUTO_INCREMENT, periode BIGINT NOT NULL, titre VARCHAR(255) NOT NULL, INDEX periode_idx (periode), PRIMARY KEY(id)) ENGINE = INNODB;
 CREATE TABLE copisim_filiere (id BIGINT AUTO_INCREMENT, periode BIGINT NOT NULL, titre VARCHAR(255) NOT NULL, INDEX periode_idx (periode), PRIMARY KEY(id)) ENGINE = INNODB;
-CREATE TABLE copisim_flux (id BIGINT AUTO_INCREMENT, periode BIGINT NOT NULL, ville BIGINT NOT NULL, complement BIGINT NOT NULL, total BIGINT NOT NULL, INDEX periode_idx (periode), INDEX ville_idx (ville), INDEX complement_idx (complement), PRIMARY KEY(id)) ENGINE = INNODB;
 CREATE TABLE copisim_message (id BIGINT AUTO_INCREMENT, exp BIGINT NOT NULL, dest BIGINT NOT NULL, titre VARCHAR(50) NOT NULL, texte TEXT NOT NULL, created_at DATETIME NOT NULL, updated_at DATETIME NOT NULL, INDEX dest_idx (dest), PRIMARY KEY(id)) ENGINE = INNODB;
 CREATE TABLE copisim_periode (id BIGINT AUTO_INCREMENT, annee year NOT NULL, debut_choix DATE NOT NULL, fin_choix DATE NOT NULL, PRIMARY KEY(id)) ENGINE = INNODB;
 CREATE TABLE copisim_poste (id BIGINT AUTO_INCREMENT, periode BIGINT NOT NULL, ville BIGINT NOT NULL, filiere BIGINT NOT NULL, total BIGINT NOT NULL, INDEX periode_idx (periode), INDEX ville_idx (ville), INDEX filiere_idx (filiere), PRIMARY KEY(id)) ENGINE = INNODB;
@@ -14,7 +13,7 @@ CREATE TABLE sf_guard_group (id BIGINT AUTO_INCREMENT, name VARCHAR(255) UNIQUE,
 CREATE TABLE sf_guard_group_permission (group_id BIGINT, permission_id BIGINT, created_at DATETIME NOT NULL, updated_at DATETIME NOT NULL, PRIMARY KEY(group_id, permission_id)) ENGINE = INNODB;
 CREATE TABLE sf_guard_permission (id BIGINT AUTO_INCREMENT, name VARCHAR(255) UNIQUE, description TEXT, created_at DATETIME NOT NULL, updated_at DATETIME NOT NULL, PRIMARY KEY(id)) ENGINE = INNODB;
 CREATE TABLE sf_guard_remember_key (id BIGINT AUTO_INCREMENT, user_id BIGINT, remember_key VARCHAR(32), ip_address VARCHAR(50), created_at DATETIME NOT NULL, updated_at DATETIME NOT NULL, INDEX user_id_idx (user_id), PRIMARY KEY(id)) ENGINE = INNODB;
-CREATE TABLE sf_guard_user (id BIGINT AUTO_INCREMENT, first_name VARCHAR(255), last_name VARCHAR(255), email_address VARCHAR(255) NOT NULL UNIQUE, username VARCHAR(128) NOT NULL UNIQUE, algorithm VARCHAR(128) DEFAULT 'sha1' NOT NULL, salt VARCHAR(128), password VARCHAR(128), is_active TINYINT(1) DEFAULT '1', is_super_admin TINYINT(1) DEFAULT '0', last_login DATETIME, created_at DATETIME NOT NULL, updated_at DATETIME NOT NULL, INDEX is_active_idx_idx (is_active), PRIMARY KEY(id)) ENGINE = INNODB;
+CREATE TABLE sf_guard_user (id BIGINT AUTO_INCREMENT, first_name VARCHAR(255), last_name VARCHAR(255), email_address VARCHAR(255) NOT NULL, username VARCHAR(128) NOT NULL UNIQUE, algorithm VARCHAR(128) DEFAULT 'sha1' NOT NULL, salt VARCHAR(128), password VARCHAR(128), is_active TINYINT(1) DEFAULT '1', is_super_admin TINYINT(1) DEFAULT '0', last_login DATETIME, created_at DATETIME NOT NULL, updated_at DATETIME NOT NULL, INDEX is_active_idx_idx (is_active), PRIMARY KEY(id)) ENGINE = INNODB;
 CREATE TABLE sf_guard_user_group (user_id BIGINT, group_id BIGINT, created_at DATETIME NOT NULL, updated_at DATETIME NOT NULL, PRIMARY KEY(user_id, group_id)) ENGINE = INNODB;
 CREATE TABLE sf_guard_user_permission (user_id BIGINT, permission_id BIGINT, created_at DATETIME NOT NULL, updated_at DATETIME NOT NULL, PRIMARY KEY(user_id, permission_id)) ENGINE = INNODB;
 ALTER TABLE copisim_choix ADD CONSTRAINT copisim_choix_poste_copisim_poste_id FOREIGN KEY (poste) REFERENCES copisim_poste(id);
@@ -22,9 +21,6 @@ ALTER TABLE copisim_choix ADD CONSTRAINT copisim_choix_etudiant_copisim_etudiant
 ALTER TABLE copisim_etudiant ADD CONSTRAINT copisim_etudiant_fac_copisim_fac_id FOREIGN KEY (fac) REFERENCES copisim_fac(id);
 ALTER TABLE copisim_fac ADD CONSTRAINT copisim_fac_periode_copisim_periode_id FOREIGN KEY (periode) REFERENCES copisim_periode(id);
 ALTER TABLE copisim_filiere ADD CONSTRAINT copisim_filiere_periode_copisim_periode_id FOREIGN KEY (periode) REFERENCES copisim_periode(id);
-ALTER TABLE copisim_flux ADD CONSTRAINT copisim_flux_ville_copisim_region_id FOREIGN KEY (ville) REFERENCES copisim_region(id);
-ALTER TABLE copisim_flux ADD CONSTRAINT copisim_flux_periode_copisim_periode_id FOREIGN KEY (periode) REFERENCES copisim_periode(id);
-ALTER TABLE copisim_flux ADD CONSTRAINT copisim_flux_complement_copisim_filiere_id FOREIGN KEY (complement) REFERENCES copisim_filiere(id);
 ALTER TABLE copisim_message ADD CONSTRAINT copisim_message_dest_copisim_etudiant_id FOREIGN KEY (dest) REFERENCES copisim_etudiant(id);
 ALTER TABLE copisim_poste ADD CONSTRAINT copisim_poste_ville_copisim_region_id FOREIGN KEY (ville) REFERENCES copisim_region(id);
 ALTER TABLE copisim_poste ADD CONSTRAINT copisim_poste_periode_copisim_periode_id FOREIGN KEY (periode) REFERENCES copisim_periode(id);

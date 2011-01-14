@@ -58,7 +58,7 @@ CopisimFac:
     titre: Lyon Sud
   Montpellier:
     CopisimPeriode: 2009
-    titre: Montpellier-NÃ®e
+    titre: Montpellier-Nîmes
   Nancy:
     CopisimPeriode: 2009
     titre: Nancy
@@ -73,13 +73,13 @@ CopisimFac:
     titre: Paris Bobigny
   Creteil:
     CopisimPeriode: 2009
-    titre: Paris CrÃ©eil
+    titre: Paris Créteil
   Descartes:
     CopisimPeriode: 2009
     titre: Paris Descartes
   Bicetre:
     CopisimPeriode: 2009
-    titre: Paris Kremlin-Bicetre
+    titre: Paris Kremlin-Bicêtre
   Ouest:
     CopisimPeriode: 2009
     titre: Paris Ouest
@@ -88,7 +88,7 @@ CopisimFac:
     titre: Paris Saint-Antoine
   Pitie:
     CopisimPeriode: 2009
-    titre: Paris PitiÃ-SalpÃtriÃre
+    titre: Paris Pitié-Salpétrière
   VII:
     CopisimPeriode: 2009
     titre: Paris VII
