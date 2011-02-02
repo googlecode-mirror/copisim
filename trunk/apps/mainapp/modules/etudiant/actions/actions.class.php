@@ -48,9 +48,9 @@ class etudiantActions extends sfActions
 
 		$this->copisim_choix = Doctrine::getTable('CopisimChoix')->getEtudiantChoix($this->getUser()->getUsername());
     $this->form = new CopisimChoixForm();
-
     $this->monchoix = Doctrine::getTable('CopisimSimulation')->getSimulEtudiant($this->getUser()->getUsername());
 		$this->absents = Doctrine::getTable('CopisimSimulation')->getAbsents($this->getUser()->getUsername());
+		$this->autres = Doctrine::getTable('CopisimChoix')->getMemeChoix($this->getUser()->getUsername(), $this->monchoix->getPoste());
   }
 
   public function executeUpdatechoix(sfWebRequest $request)

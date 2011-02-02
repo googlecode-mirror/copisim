@@ -187,4 +187,16 @@ class CopisimChoixTable extends Doctrine_Table
 
 			return $count['Aucun choix valide'];
 		}
+
+		public function getMemeChoix($classement, $poste)
+		{
+			$q = Doctrine_Query::create()
+			  ->from('CopisimChoix a')
+				->leftJoin('a.CopisimEtudiant b')
+				->where('b.classement < ?', $classement)
+				->andWhere('a.poste = ?', $poste)
+				->orderBy('b.classement asc');
+
+			return $q->execute();
+		}
 }
