@@ -17,7 +17,7 @@ class CopisimPosteTable extends Doctrine_Table
 				->leftJoin('a.CopisimFiliere c')
 				->leftJoin('a.CopisimRegion d')
 				->where('b.annee = ?', $periode)
-				->orderBy('c.titre asc, d.titre asc');
+				->orderBy('d.titre asc, c.titre asc');
 		  
 			return $q->execute();
 		}

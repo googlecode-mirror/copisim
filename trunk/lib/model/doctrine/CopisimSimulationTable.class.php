@@ -162,7 +162,7 @@ class CopisimSimulationTable extends Doctrine_Table
     /*
 		  Mise à jour du tableau de postes restants avec les étapes précédentes de la simulation
 		*/
-		private function updatePostes($postes, $limite = null)
+		public function updatePostes($postes, $limite = null)
 		{
 			foreach($postes as $poste=>$total)
 			{
