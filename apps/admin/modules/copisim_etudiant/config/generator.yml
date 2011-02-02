@@ -1,0 +1,43 @@
+generator:
+  class: sfDoctrineGenerator
+  param:
+    model_class:           CopisimEtudiant
+    theme:                 admin
+    non_verbose_templates: true
+    with_show:             false
+    singular:              ~
+    plural:                ~
+    route_prefix:          copisim_etudiant
+    with_doctrine_route:   true
+    actions_base_class:    sfActions
+
+    config:
+      actions: ~
+      fields:
+        fac: { label: Groupe, help: Un groupe d'étudiants (fac promo) }
+        copisim_fac: { label: Groupe, help: Un groupe d'étudiants (fac promo) auquel sera attribué un référent }
+        naissance: { label: Date de naissance, help: La date de naissance de l'étudiant }
+        anonyme: { label: Anonymat, help: Si l'étudiant a demandé l'anonymat sur les listes }
+        annee: { label: Promo, help: La promotion de l'étudiant, principalement à des fins statistiques }
+        classement: { label: Classement, help: Le classement de l'étudiant dans les choix }
+      list:
+        title: Gestion des étudiants participant à la simulation
+        display: [=classement, =nom, prenom, copisim_fac, naissance, annee]
+        sort: [classement, asc]
+        max_per_page: 50
+        table_method: getListeAdmin
+        batch_actions: {}
+        object_actions: {}
+        actions:
+          _new: ~
+          importEtudiant: { label: Importer }
+          archiveEtudiant: { label: Archiver la session }
+      filter:
+        display: [classement, nom, fac, annee]
+      form:
+        class: AdminCopisimEtudiantForm
+        display: [classement, nom, prenom, fac, annee]
+      edit:
+        title: Edition de l'étudiant "%%classement%% : %%nom%% %%prenom%%"
+      new:
+        title: Ajouter un étudiant à la simulation

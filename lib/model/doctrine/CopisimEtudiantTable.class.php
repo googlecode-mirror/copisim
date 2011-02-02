@@ -39,4 +39,11 @@ class CopisimEtudiantTable extends Doctrine_Table
       return $q;
     }
 
+    public function getListeAdmin(Doctrine_Query $q)
+    {
+      $rootAlias = $q->getRootAlias();
+      $q->leftJoin($rootAlias . '.CopisimFac c');
+      return $q;
+    }
+
 }

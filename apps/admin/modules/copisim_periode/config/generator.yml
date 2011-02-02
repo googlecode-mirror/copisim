@@ -1,0 +1,29 @@
+generator:
+  class: sfDoctrineGenerator
+  param:
+    model_class:           CopisimPeriode
+    theme:                 admin
+    non_verbose_templates: true
+    with_show:             false
+    singular:              ~
+    plural:                ~
+    route_prefix:          copisim_periode
+    with_doctrine_route:   true
+    actions_base_class:    sfActions
+
+    config:
+      actions: ~
+      fields:
+        annee: { label: Année, help: Un tag de référence pour la session }
+        debut_choix: { label: Début des choix, help: La date d'ouverture de la session de choix au public }
+        fin_choix: { label: Fin des choix, help: La date de fermeture de la session de choix }
+      list:   
+        title: Gestion des périodes de choix
+        display: [=annee, debut_choix, fin_choix]
+      filter:
+        display: [annee]
+      form:    ~
+      edit:
+        title: Modifier la période "%%annee%%"
+      new:
+        title: Ajouter une session de choix

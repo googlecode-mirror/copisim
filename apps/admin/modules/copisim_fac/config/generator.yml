@@ -1,0 +1,33 @@
+generator:
+  class: sfDoctrineGenerator
+  param:
+    model_class:           CopisimFac
+    theme:                 admin
+    non_verbose_templates: true
+    with_show:             false
+    singular:              ~
+    plural:                ~
+    route_prefix:          copisim_fac
+    with_doctrine_route:   true
+    actions_base_class:    sfActions
+
+    config:
+      actions: ~
+      fields:
+        periode: { label: Période, help: La période correspondante }
+        titre: { label: Titre, help: Le nom d'affichage de l'item }
+      list:
+        title: Gestion des groupes d'étudiants pour la simulation
+        display: [=titre]
+        sort: [titre, asc]
+        max_per_page: 20
+        batch_actions: {}
+        object_actions: {}
+        actions: ~
+      filter:
+        display: [titre]
+      form:    ~
+      edit:
+        title: Modifier le groupe "%%titre%%"
+      new:
+        title: Ajouter un groupe
