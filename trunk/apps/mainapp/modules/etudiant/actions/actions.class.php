@@ -20,7 +20,7 @@ class etudiantActions extends sfActions
 
 		if($this->getUser()->isAuthenticated())
 		{
-			$simulation = Doctrine::getTable('CopisimSimulation');
+//			$simulation = Doctrine::getTable('CopisimSimulation');
 //			$this->simul_choix = $simulation['choix'];
 		}
   }

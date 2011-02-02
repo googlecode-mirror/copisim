@@ -24,7 +24,19 @@
       </td>
       <td><?php echo $copisim_etudiant->getCopisimFac()->getTitre(); ?></td>
 			<?php if($sf_user->isAuthenticated()): ?>
-			  <td><?php echo $simul_choix[$copisim_etudiant->getClassement()]; ?></td>
+			  <td>
+				  <?php if($copisim_etudiant->getCopisimSimulation()): ?>
+				    <?php foreach($copisim_etudiant->getCopisimSimulation() as $simul): ?>
+						  <?php if($simul->getCopisimPoste()): ?>
+							  <?php echo $simul->getCopisimPoste()->getCopisimFiliere()->getTitre(); ?> à <?php echo $simul->getCopisimPoste()->getCopisimRegion()->getTitre(); ?>
+							<?php else: ?>
+							  aucun choix valide
+							<?php endif; ?>
+						<?php endforeach; ?>
+					<?php else: ?>
+					  hors simulation
+					<?php endif; ?>
+				</td>
 			<?php endif; ?>
     </tr>
     <?php endforeach; ?>
