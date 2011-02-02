@@ -16,7 +16,7 @@
 	<span id="menu">
 	  <ul>
 	    <li><a href="<?php echo url_for('@homepage') ?>">Accueil</a></li>
-	    <li><a href="<?php echo url_for('etudiant/index') ?>">Classement des ECN</a></li>
+	    <li><a href="<?php echo url_for('etudiant/index') ?>">Classement</a></li>
 			<li><a href="<?php echo url_for('choix/index') ?>">Répartition des postes</a></li>
 	    <?php if ($sf_user->isAuthenticated()): ?>
 	      <li><a href="<?php echo url_for('etudiant/editchoix'); ?>">Mes choix</a></li>
