@@ -102,7 +102,22 @@ class CopisimChoixTable extends Doctrine_Table
 			  ->update('CopisimChoix a')
 				->set('a.ordre', 'a.ordre + 1')
 				->where('a.etudiant = ?', $etudiant)
+				->andWhere('a.ordre > ?', '0')
 				->execute();
+		}
+
+		public function isAlreadySaved($etudiant, $poste)
+		{
+			$q = Doctrine_Query::create()
+			  ->from('CopisimChoix a')
+				->where('etudiant = ?', $etudiant)
+				->andWhere('poste = ?', $poste)
+				->limit(1);
+
+			if($choix = $q->fetchOne())
+				return $choix;
+			else
+				return false;
 		}
 
 		public function simulChoix($periode, $classement_etudiant = null)
@@ -134,9 +149,13 @@ class CopisimChoixTable extends Doctrine_Table
 
 			$prev = '';
 			$choix_etudiant = array();
-			foreach($etudiants as $etudiant)
-			  $choix_etudiant[$etudiant->getClassement()] = "Aucun choix valide";
 
+//print_r($etudiants[1]);
+//echo $etudiants->getClassement();
+//exit;
+
+      foreach($etudiants as $etudiant)
+			  $choix_etudiant[$etudiant->getClassement()] = "Aucun choix valide";
 
 			foreach($choixs as $choix)
 			{
@@ -152,12 +171,6 @@ class CopisimChoixTable extends Doctrine_Table
 				}
 			}
 
-//			foreach($etudiants as $etudiant)
-//			{
-//				if(null === $choix_etudiant[$etudiant->getClassement()])
-//					$choix_etudiant[$etudiant->getClassement()] = "Aucun choix valide";
-//			}
-			
 			$tableau = array();
 			$tableau['postes'] = $postes;
 			$tableau['choix'] = $choix_etudiant;

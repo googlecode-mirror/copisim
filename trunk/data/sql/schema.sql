@@ -7,6 +7,7 @@ CREATE TABLE copisim_periode (id BIGINT AUTO_INCREMENT, annee year NOT NULL, deb
 CREATE TABLE copisim_poste (id BIGINT AUTO_INCREMENT, periode BIGINT NOT NULL, ville BIGINT NOT NULL, filiere BIGINT NOT NULL, total BIGINT NOT NULL, INDEX periode_idx (periode), INDEX ville_idx (ville), INDEX filiere_idx (filiere), PRIMARY KEY(id)) ENGINE = INNODB;
 CREATE TABLE copisim_referent (id BIGINT AUTO_INCREMENT, periode BIGINT NOT NULL, nom VARCHAR(50) NOT NULL, email VARCHAR(100) NOT NULL, tel VARCHAR(10), divers TEXT, fac BIGINT NOT NULL, INDEX periode_idx (periode), INDEX fac_idx (fac), PRIMARY KEY(id)) ENGINE = INNODB;
 CREATE TABLE copisim_region (id BIGINT AUTO_INCREMENT, periode BIGINT NOT NULL, titre VARCHAR(255) NOT NULL, INDEX periode_idx (periode), PRIMARY KEY(id)) ENGINE = INNODB;
+CREATE TABLE copisim_simulation (id BIGINT AUTO_INCREMENT, etudiant BIGINT NOT NULL, poste BIGINT, reste MEDIUMINT, INDEX etudiant_idx (etudiant), INDEX poste_idx (poste), PRIMARY KEY(id)) ENGINE = INNODB;
 CREATE TABLE cs_setting (id INT AUTO_INCREMENT, name VARCHAR(255) NOT NULL UNIQUE, type VARCHAR(255) DEFAULT 'input' NOT NULL, widget_options LONGTEXT, value LONGTEXT, setting_group VARCHAR(255) DEFAULT NULL, setting_default LONGTEXT DEFAULT NULL, slug VARCHAR(255), UNIQUE INDEX cs_setting_sluggable_idx (slug), PRIMARY KEY(id)) ENGINE = INNODB;
 CREATE TABLE sf_guard_forgot_password (id BIGINT AUTO_INCREMENT, user_id BIGINT NOT NULL, unique_key VARCHAR(255), expires_at DATETIME NOT NULL, created_at DATETIME NOT NULL, updated_at DATETIME NOT NULL, INDEX user_id_idx (user_id), PRIMARY KEY(id)) ENGINE = INNODB;
 CREATE TABLE sf_guard_group (id BIGINT AUTO_INCREMENT, name VARCHAR(255) UNIQUE, description TEXT, created_at DATETIME NOT NULL, updated_at DATETIME NOT NULL, PRIMARY KEY(id)) ENGINE = INNODB;
@@ -28,6 +29,8 @@ ALTER TABLE copisim_poste ADD CONSTRAINT copisim_poste_filiere_copisim_filiere_i
 ALTER TABLE copisim_referent ADD CONSTRAINT copisim_referent_periode_copisim_periode_id FOREIGN KEY (periode) REFERENCES copisim_periode(id);
 ALTER TABLE copisim_referent ADD CONSTRAINT copisim_referent_fac_copisim_fac_id FOREIGN KEY (fac) REFERENCES copisim_fac(id);
 ALTER TABLE copisim_region ADD CONSTRAINT copisim_region_periode_copisim_periode_id FOREIGN KEY (periode) REFERENCES copisim_periode(id);
+ALTER TABLE copisim_simulation ADD CONSTRAINT copisim_simulation_poste_copisim_poste_id FOREIGN KEY (poste) REFERENCES copisim_poste(id);
+ALTER TABLE copisim_simulation ADD CONSTRAINT copisim_simulation_etudiant_copisim_etudiant_classement FOREIGN KEY (etudiant) REFERENCES copisim_etudiant(classement);
 ALTER TABLE sf_guard_forgot_password ADD CONSTRAINT sf_guard_forgot_password_user_id_sf_guard_user_id FOREIGN KEY (user_id) REFERENCES sf_guard_user(id) ON DELETE CASCADE;
 ALTER TABLE sf_guard_group_permission ADD CONSTRAINT sf_guard_group_permission_permission_id_sf_guard_permission_id FOREIGN KEY (permission_id) REFERENCES sf_guard_permission(id) ON DELETE CASCADE;
 ALTER TABLE sf_guard_group_permission ADD CONSTRAINT sf_guard_group_permission_group_id_sf_guard_group_id FOREIGN KEY (group_id) REFERENCES sf_guard_group(id) ON DELETE CASCADE;

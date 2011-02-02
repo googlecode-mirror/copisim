@@ -31,5 +31,16 @@ class CopisimPosteTable extends Doctrine_Table
 				$tableau[$poste->getCopisimFiliere()->getTitre()][$poste->getCopisimRegion()->getTitre()] = $poste->getTotal();
 
 			return $tableau;
-		}			
+		}
+
+		public function getPostesIdTableau($periode)
+		{
+			$object = $this->getPostesParPeriode($periode);
+			$tableau = array();
+
+			foreach($object as $poste)
+				$tableau[$poste->getId()] = $poste->getTotal();
+
+			return $tableau;
+		}
 }

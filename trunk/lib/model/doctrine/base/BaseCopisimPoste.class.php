@@ -13,23 +13,26 @@
  * @property CopisimRegion $CopisimRegion
  * @property CopisimFiliere $CopisimFiliere
  * @property Doctrine_Collection $CopisimChoix
+ * @property Doctrine_Collection $CopisimSimulation
  * 
- * @method integer             getPeriode()        Returns the current record's "periode" value
- * @method integer             getVille()          Returns the current record's "ville" value
- * @method integer             getFiliere()        Returns the current record's "filiere" value
- * @method integer             getTotal()          Returns the current record's "total" value
- * @method CopisimPeriode      getCopisimPeriode() Returns the current record's "CopisimPeriode" value
- * @method CopisimRegion       getCopisimRegion()  Returns the current record's "CopisimRegion" value
- * @method CopisimFiliere      getCopisimFiliere() Returns the current record's "CopisimFiliere" value
- * @method Doctrine_Collection getCopisimChoix()   Returns the current record's "CopisimChoix" collection
- * @method CopisimPoste        setPeriode()        Sets the current record's "periode" value
- * @method CopisimPoste        setVille()          Sets the current record's "ville" value
- * @method CopisimPoste        setFiliere()        Sets the current record's "filiere" value
- * @method CopisimPoste        setTotal()          Sets the current record's "total" value
- * @method CopisimPoste        setCopisimPeriode() Sets the current record's "CopisimPeriode" value
- * @method CopisimPoste        setCopisimRegion()  Sets the current record's "CopisimRegion" value
- * @method CopisimPoste        setCopisimFiliere() Sets the current record's "CopisimFiliere" value
- * @method CopisimPoste        setCopisimChoix()   Sets the current record's "CopisimChoix" collection
+ * @method integer             getPeriode()           Returns the current record's "periode" value
+ * @method integer             getVille()             Returns the current record's "ville" value
+ * @method integer             getFiliere()           Returns the current record's "filiere" value
+ * @method integer             getTotal()             Returns the current record's "total" value
+ * @method CopisimPeriode      getCopisimPeriode()    Returns the current record's "CopisimPeriode" value
+ * @method CopisimRegion       getCopisimRegion()     Returns the current record's "CopisimRegion" value
+ * @method CopisimFiliere      getCopisimFiliere()    Returns the current record's "CopisimFiliere" value
+ * @method Doctrine_Collection getCopisimChoix()      Returns the current record's "CopisimChoix" collection
+ * @method Doctrine_Collection getCopisimSimulation() Returns the current record's "CopisimSimulation" collection
+ * @method CopisimPoste        setPeriode()           Sets the current record's "periode" value
+ * @method CopisimPoste        setVille()             Sets the current record's "ville" value
+ * @method CopisimPoste        setFiliere()           Sets the current record's "filiere" value
+ * @method CopisimPoste        setTotal()             Sets the current record's "total" value
+ * @method CopisimPoste        setCopisimPeriode()    Sets the current record's "CopisimPeriode" value
+ * @method CopisimPoste        setCopisimRegion()     Sets the current record's "CopisimRegion" value
+ * @method CopisimPoste        setCopisimFiliere()    Sets the current record's "CopisimFiliere" value
+ * @method CopisimPoste        setCopisimChoix()      Sets the current record's "CopisimChoix" collection
+ * @method CopisimPoste        setCopisimSimulation() Sets the current record's "CopisimSimulation" collection
  * 
  * @package    copisim
  * @subpackage model
@@ -75,6 +78,10 @@ abstract class BaseCopisimPoste extends sfDoctrineRecord
              'foreign' => 'id'));
 
         $this->hasMany('CopisimChoix', array(
+             'local' => 'id',
+             'foreign' => 'poste'));
+
+        $this->hasMany('CopisimSimulation', array(
              'local' => 'id',
              'foreign' => 'poste'));
     }

@@ -89,3 +89,12 @@ CopisimMessage:
   relations:
     CopisimEtudiant: { local: exp, foreign: id }
     CopisimEtudiant: { local: dest, foreign: id }
+
+CopisimSimulation:
+  columns:
+    etudiant: { type: integer, notnull: true }
+    poste: { type: integer, notnull: false }
+    reste: { type: integer (3), notnull: false }
+  relations:
+    CopisimEtudiant: { local: etudiant, foreign: classement }
+    CopisimPoste: { local: poste, foreign: id }

@@ -29,9 +29,7 @@ class choixActions extends sfActions
 		$this->copisim_postes = Doctrine::getTable('CopisimPoste')->getPostesTableau($periode);
 		$this->copisim_regions = Doctrine::getTable('CopisimRegion')->getRegionsParPeriode($periode);
 		$this->copisim_filieres = Doctrine::getTable('CopisimFiliere')->getFilieresParPeriode($periode);
-
-		$simulation = Doctrine::getTable('CopisimChoix')->simulChoix('2009', $this->getUser()->getUsername());
-		$this->simul_postes = $simulation['postes'];
+		$this->simul_postes = Doctrine::getTable('CopisimSimulation')->updatePostes(Doctrine::getTable('CopisimPoste')->getPostesIdTableau($periode));
   }
 
   public function executeShow(sfWebRequest $request)

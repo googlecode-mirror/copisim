@@ -18,6 +18,12 @@ class CopisimChoix extends BaseCopisimChoix
 		if(null === $this->getEtudiant())
 		  $this->setEtudiant(sfContext::getInstance()->getUser()->getGuardUser()->getUserName());
 
+//		if($choix = Doctrine::getTable('CopisimChoix')->isAlreadySaved($this->getEtudiant(), $this->getPoste()))
+//		{
+//			$this = $choix;
+//			$this->setOrdre('0');
+//		}
+
 		if(null === $this->getOrdre())
 		{
 			$this->setOrdre('1');
