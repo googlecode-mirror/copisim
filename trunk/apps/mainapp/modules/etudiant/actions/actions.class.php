@@ -17,12 +17,6 @@ class etudiantActions extends sfActions
     $this->pager->setQuery(Doctrine_Core::getTable('CopisimEtudiant')->getListeQuery());
     $this->pager->setPage($request->getParameter('page', 1));
     $this->pager->init();
-
-		if($this->getUser()->isAuthenticated())
-		{
-//			$simulation = Doctrine::getTable('CopisimSimulation');
-//			$this->simul_choix = $simulation['choix'];
-		}
   }
 
   public function executeEditchoix(sfWebRequest $request)
