@@ -12,26 +12,25 @@
     </tr>
   </thead>
   <tbody>
-    <?php foreach ($copisim_regions as $region): ?>
+    <?php $i=1; $total_restant=0; $total=0; foreach ($copisim_regions as $region): ?>
     <tr>
 		  <td><?php echo $region->getTitre(); ?></td>
-		  <?php foreach ($copisim_filieres as $filiere): ?>
+		  <?php foreach ($region->getCopisimPoste() as $poste): ?>
       <td>
-			  <?php
-					echo $simul_postes[$filiere->getTitre()][$region->getTitre()];
-				?>
-				 / 
 			  <?php 
-				  if(null !== $copisim_postes[$filiere->getTitre()][$region->getTitre()]):
-						echo $copisim_postes[$filiere->getTitre()][$region->getTitre()];
+				  if($poste->getCopisimSimulation()->getFirst()):
+				    echo $poste->getCopisimSimulation()->getFirst()->getReste();
+						$total_restant += $poste->getCopisimSimulation()->getFirst()->getReste();
 					else:
-						echo '0';
+						echo $poste->getTotal();
 					endif;
-				?>
+					$total += $poste->getTotal(); ?>
+				 / 
+			  <?php echo $poste->getTotal(); ?>
 			</td>
 			<?php endforeach; ?>
     </tr>
     <?php endforeach; ?>
   </tbody>
 </table>
-
+<div>Soit <?php echo $total_restant; ?> postes restants sur <?php echo $total; ?> postes proposés.</div>
