@@ -17,6 +17,12 @@ class etudiantActions extends sfActions
     $this->pager->setQuery(Doctrine_Core::getTable('CopisimEtudiant')->getListeQuery());
     $this->pager->setPage($request->getParameter('page', 1));
     $this->pager->init();
+
+		if($this->getUser()->isAuthenticated())
+		{
+			$simulation = Doctrine::getTable('CopisimSimulation');
+//			$this->simul_choix = $simulation['choix'];
+		}
   }
 
   public function executeEditchoix(sfWebRequest $request)
@@ -41,15 +47,10 @@ class etudiantActions extends sfActions
 		}
 
 		$this->copisim_choix = Doctrine::getTable('CopisimChoix')->getEtudiantChoix($this->getUser()->getUsername());
-
     $this->form = new CopisimChoixForm();
-		$simulation = Doctrine::getTable('CopisimChoix')->simulChoix('2009', $this->getUser()->getUsername());
-		$simul_choix = $simulation['choix'];
-		$this->monchoix = $simul_choix[$this->getUser()->getUsername()];
-		$simul_postes = $simulation['postes'];
-		$dich_choix = explode(' à ', $this->monchoix);
-		$this->monposte = $simul_postes[$dich_choix[0]][$dich_choix[1]];
-		$this->simul_absents = $simulation['absents'];
+
+    $this->monchoix = Doctrine::getTable('CopisimSimulation')->getSimulEtudiant($this->getUser()->getUsername());
+		$this->absents = Doctrine::getTable('CopisimSimulation')->getAbsents($this->getUser()->getUsername());
   }
 
   public function executeUpdatechoix(sfWebRequest $request)
@@ -69,6 +70,21 @@ class etudiantActions extends sfActions
 
     $this->setTemplate('editchoix');
   }
+
+	public function executeUpdatesimul(sfWebRequest $request)
+	{
+		if(!$debut = $request->getParameter('debut'))
+			$debut = 1;
+
+		$fin = $debut + 500;
+
+		$simul = Doctrine::getTable('CopisimSimulation')->simulChoixPager($debut, $fin, '2009');
+
+		if($fin < Doctrine::getTable('CopisimSimulation')->getMaxEtudiant())
+			$this->redirect('etudiant/updatesimul/?debut='.$fin);
+		else
+			$this->redirect('etudiant/editchoix');;
+	}
 
   public function executeEdit(sfWebRequest $request)
   {

@@ -6,6 +6,9 @@
       <th>Classement</th>
       <th>Nom</th>
       <th>Faculté</th>
+			<?php if($sf_user->isAuthenticated()): ?>
+			  <th>Choix</th>
+			<?php endif; ?>
     </tr>
   </thead>
   <tbody>
@@ -16,10 +19,13 @@
         <?php if($copisim_etudiant->getAnonyme()): ?>
           ***anonyme***
         <?php else: ?>
-	  <?php echo $copisim_etudiant->getNom()." ".$copisim_etudiant->getPrenom() ?>
-	<?php endif; ?>
+      	  <?php echo $copisim_etudiant->getNom()." ".$copisim_etudiant->getPrenom() ?>
+				<?php endif; ?>
       </td>
       <td><?php echo $copisim_etudiant->getCopisimFac()->getTitre(); ?></td>
+			<?php if($sf_user->isAuthenticated()): ?>
+			  <td><?php echo $simul_choix[$copisim_etudiant->getClassement()]; ?></td>
+			<?php endif; ?>
     </tr>
     <?php endforeach; ?>
   </tbody>

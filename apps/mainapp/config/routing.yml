@@ -62,7 +62,6 @@ etudiant_choixdel:
   requirements:
     del: \d+
 
-
 etudiant_prefs:
   url: /etudiant/infos
   param: { module: etudiant, action: edit }
@@ -72,6 +71,16 @@ etudiant_updateprefs:
   param: { module: etudiant, action: update }
 #  requirements:
 #    method: post
+
+simul_update:
+  url: /etudiant/simul
+  param: { module: etudiant, action: updatesimul }
+
+simul_update_next:
+  url: /etudiant/simul/:debut
+  param: { module: etudiant, action: updatesimul }
+  requirements:
+    debut: \d+
 
 choix_repartition_0:
   url: /choix/

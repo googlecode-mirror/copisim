@@ -1,6 +1,7 @@
 <h1>Mes choix :</h1>
 
-<div>Votre choix retenu par la simulation est : <em><?php echo $monchoix; ?></em>. Après vous, il reste encore <em><?php echo $monposte; ?> places</em> pour ce poste. Attention, <em><?php echo $simul_absents; ?> personnes</em> n'ont pas de choix valide avant vous, et donc votre choix retenu peut encore varier avant la fin de la simulation.</div>
+<div>Votre choix retenu par la simulation est : <em><?php echo $monchoix->getCopisimPoste()->getCopisimFiliere()->getTitre(); ?> à <?php echo $monchoix->getCopisimPoste()->getCopisimRegion()->getTitre(); ?></em>. Après vous, il reste encore <em><?php echo $monchoix->getReste(); ?> places</em> pour ce poste.</div>
+<div><em><?php echo $absents; ?> personnes</em> devant vous n'ont pas de choix valide à ce jour.</div>
 
 <div>
   <?php 
@@ -15,21 +16,8 @@
 </div>
 
 <form action="<?php echo url_for('etudiant/updatechoix'); ?>" method="post">
-  <table>
-    <tfoot>
-      <tr>
-        <td colspan="3"><input type="submit" value="Enregistrer" /></td>
-      </tr>
-    </tfoot>
-    <tbody>
-      <tr>
-        <td><?php echo $form->renderHiddenFields(); ?></td>
-	<td><?php echo $form->renderGlobalErrors(); ?></td>
-      </tr>
-      <tr>
-        <td><?php echo $form; ?></td>
-      </tr>
-    </tbody>
-  </table>
+  <div><?php echo $form->renderGlobalErrors(); ?></div>
+  <div><?php echo $form; ?><input type="submit" value="Ajouter" /></div>
 </form>
 
+<div>Cliquer ici pour mettre à jour les valeurs de la simulation (attention cette étape peut prendre plusieurs minutes) : <a href="<?php echo url_for('etudiant/updatesimul'); ?>">simulation</a></div>
