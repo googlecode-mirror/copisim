@@ -14,7 +14,7 @@ class CopisimEtudiantTable extends Doctrine_Table
       $q = Doctrine_Query::create()
         ->from('CopisimEtudiant a')
 	->select('a.email, a.email_tmp')
-	->where('a.id = ?', $user)
+	->where('a.classement = ?', $user)
 	->limit(1)
 	->fetchOne();
       

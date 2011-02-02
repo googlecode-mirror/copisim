@@ -21,3 +21,28 @@
 </form>
 
 <div>Cliquer ici pour mettre à jour les valeurs de la simulation (attention cette étape peut prendre plusieurs minutes) : <a href="<?php echo url_for('etudiant/updatesimul'); ?>">simulation</a></div>
+
+<table>
+  <thead>
+    <tr>
+		  <th>Classement</th>
+			<th>Etudiant</th>
+			<th>Position</th>
+		</tr>
+	</thead>
+	<tbody>
+	  <?php foreach($autres as $autre): ?>
+		  <tr>
+			  <td><?php echo $autre->getCopisimEtudiant()->getClassement(); ?></td>
+				<td><a href="<?php echo url_for('etudiant/editchoix'); ?>">
+				  <?php if($autre->getCopisimEtudiant()->getAnonyme()): ?>
+					  *** anonyme ***
+					<?php else: ?>
+					  <?php echo $autre->getCopisimEtudiant()->getNom(); ?> <?php echo $autre->getCopisimEtudiant()->getPrenom(); ?>
+					<?php endif; ?>
+				</a></td>
+				<td><?php if(!$autre->getOrdre()): echo "supprimé"; else: echo "choix ".$autre->getOrdre(); endif; ?></td>
+			</tr>
+		<?php endforeach; ?>
+	</tbody>
+</table>
