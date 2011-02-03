@@ -12,5 +12,6 @@ class CopisimRegionForm extends BaseCopisimRegionForm
 {
   public function configure()
   {
+		unset($this['periode']);
   }
 }

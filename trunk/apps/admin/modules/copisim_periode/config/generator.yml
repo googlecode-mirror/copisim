@@ -15,15 +15,30 @@ generator:
       actions: ~
       fields:
         annee: { label: Année, help: Un tag de référence pour la session }
-        debut_choix: { label: Début des choix, help: La date d'ouverture de la session de choix au public }
-        fin_choix: { label: Fin des choix, help: La date de fermeture de la session de choix }
+        debut_choix: { label: Début des choix, help: La date d'ouverture de la session de choix au public (MM/JJ/AAAA) }
+        fin_choix: { label: Fin des choix, help: La date de fermeture de la session de choix (MM/JJ/AAAA) }
       list:   
         title: Gestion des périodes de choix
         display: [=annee, debut_choix, fin_choix]
+#        display: [=annee, debut_choix, fin_choix, copisim_filiere, copisim_region]
+#        table_method: listPeriodeFiliereRegion
+        batch_actions: {}
+        object_actions:
+          _edit: { label: Modifier }
+        actions:
+          _new: { label: Ajouter }
       filter:
         display: [annee]
-      form:    ~
+      form:
       edit:
         title: Modifier la période "%%annee%%"
+        actions:
+          _delete: { label: Supprimer }
+          _list: { label: Retour à la liste }
+          importLastFiliere: { label: 1. Importer les filières de la dernière session }
+          importLastRegion: { label: 2. Importer les lieux de la dernière session }
       new:
         title: Ajouter une session de choix
+        actions:
+          _save: { label: Enregistrer }
+          _list: { label: Retour à la liste }

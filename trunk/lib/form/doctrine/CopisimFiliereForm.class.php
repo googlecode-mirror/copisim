@@ -12,5 +12,6 @@ class CopisimFiliereForm extends BaseCopisimFiliereForm
 {
   public function configure()
   {
+		unset($this['periode']);
   }
 }
