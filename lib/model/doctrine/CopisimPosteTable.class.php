@@ -43,4 +43,27 @@ class CopisimPosteTable extends Doctrine_Table
 
 			return $tableau;
 		}
+
+		public function createPosteFromSession($periode)
+		{
+			$filieres = Doctrine::getTable('CopisimFiliere')->findByPeriode($periode);
+			$regions = Doctrine::getTable('CopisimRegion')->findByPeriode($periode);
+			$postes = 0;
+
+			foreach($filieres as $filiere)
+			{
+				foreach($regions as $region)
+				{
+					$new_poste = new CopisimPoste();
+					$new_poste->setPeriode($periode);
+					$new_poste->setVille($region->getId());
+					$new_poste->setFiliere($filiere->getId());
+					$new_poste->setTotal(0);
+					$new_poste->save();
+					$postes++;
+				}
+			}
+
+			return $postes;
+		}
 }
