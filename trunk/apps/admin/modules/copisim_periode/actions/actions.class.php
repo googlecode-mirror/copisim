@@ -27,11 +27,22 @@ class copisim_periodeActions extends autoCopisim_periodeActions
 	public function executeListImportLastRegion(sfWebRequest $request)
 	{
 		if($regions = Doctrine::getTable('CopisimRegion')->addRegionToSession())
-			$this->getUser()->setFlash('notice', 'Des filières ont été ajoutées à la session : '.$regions);
+			$this->getUser()->setFlash('notice', 'Des régions ont été ajoutées à la session : '.$regions);
+		else
+			$this->getUser()->setFlash('error', 'Pas de régions à importer depuis la session précédente');
+
+		$copisim_periode = $this->getRoute()->getObject();
+		$this->redirect(array('sf_route' => 'copisim_periode_edit', 'sf_subject' => $copisim_periode));
+	}
+
+	public function executeListCreatePoste(sfWebRequest $request)
+	{
+		$copisim_periode = $this->getRoute()->getObject();
+		if($postes = Doctrine::getTable('CopisimPoste')->createPosteFromSession($copisim_periode->getId()))
+			$this->getUser()->setFlash('notice', $regions.' postes ont été créés pour la session');
 		else
 			$this->getUser()->setFlash('error', 'Pas de filières à importer depuis la session précédente');
 
-		$copisim_periode = $this->getRoute()->getObject();
 		$this->redirect(array('sf_route' => 'copisim_periode_edit', 'sf_subject' => $copisim_periode));
 	}
 }
