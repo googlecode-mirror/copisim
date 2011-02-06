@@ -12,5 +12,6 @@ class CopisimPosteForm extends BaseCopisimPosteForm
 {
   public function configure()
   {
+		unset($this['periode'], $this['filiere'], $this['ville']);
   }
 }

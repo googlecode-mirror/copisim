@@ -48,7 +48,7 @@ copisim_periode:
   options:
     model:                CopisimPeriode
     module:               copisim_periode
-    prefix_path:          /copisim_periode
+    prefix_path:          /session
     column:               id
     with_wildcard_routes: true
 
@@ -58,13 +58,20 @@ copisim_periode:
 # default rules
 homepage:
   url:   /
-  param: { module: default, action: index }
+  param: { module: copisim_periode, action: index }
+
+#copisim_periode_list_create_poste:
+#  url: /session/:id/ListCreatePoste
+#  param: { module: copisim_periode, action: ListCreatePoste }
+#  requirements:
+#    method: post
+#    id: \d+
 
 # generic rules
 # please, remove them by adding more specific rules
-default_index:
-  url:   /:module
-  param: { action: index }
+#default_index:
+#  url:   /:module
+#  param: { action: index }
 
-default:
-  url:   /:module/:action/*
+#default:
+#  url:   /:module/:action/*
