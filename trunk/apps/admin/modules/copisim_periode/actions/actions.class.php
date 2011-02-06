@@ -35,7 +35,7 @@ class copisim_periodeActions extends autoCopisim_periodeActions
 		$this->redirect(array('sf_route' => 'copisim_periode_edit', 'sf_subject' => $copisim_periode));
 	}
 
-	public function executeListCreatePoste(sfWebRequest $request)
+	public function executeListGeneratePoste(sfWebRequest $request)
 	{
 		$copisim_periode = $this->getRoute()->getObject();
 		if($postes = Doctrine::getTable('CopisimPoste')->createPosteFromSession($copisim_periode->getId()))
@@ -43,6 +43,40 @@ class copisim_periodeActions extends autoCopisim_periodeActions
 		else
 			$this->getUser()->setFlash('error', 'Pas de filières à importer depuis la session précédente');
 
-		$this->redirect(array('sf_route' => 'copisim_periode_edit', 'sf_subject' => $copisim_periode));
+		$this->redirect('copisim_periode/ListEditPoste?id='.$copisim_periode->getId());
+	}
+
+	public function executeListEditPoste(sfWebRequest $request)
+	{
+		$this->periode = $this->getRoute()->getObject()->getId();
+//		print_r($this->getRoute());
+		$this->forward404Unless($this->filieres = Doctrine::getTable('CopisimFiliere')->getFilieresParPeriode($this->periode), sprintf('Pas de filières trouvées pour la période %s. Veuillez ajouter des filières.', $this->periode));
+		$this->forward404Unless($this->regions = Doctrine::getTable('CopisimRegion')->getRegionsParPeriode($this->periode), sprintf('Pas de régions trouvées pour la période %s. Veuillez ajouter des régions.', $this->periode));
+		$this->forward404Unless($postes = Doctrine::getTable('CopisimPoste')->getPostesParPeriode($this->periode), sprintf('Pas de postes trouvées pour la période %s. Veuillez générer les postes.', $this->periode));
+		$this->form = new EditPosteForm();
+		$this->form->embed($postes);
+	}
+
+	public function executeListCreatePoste(sfWebRequest $request)
+	{
+//		$this->forward404Unless($request->isMethod(sfRequest::POST));
+		$this->periode = $this->getRoute()->getObject()->getId();
+//    $this->periode = $request->getParameter('id');
+		$this->forward404Unless($this->filieres = Doctrine::getTable('CopisimFiliere')->getFilieresParPeriode($this->periode), sprintf('Pas de filières trouvées pour la période %s. Veuillez ajouter des filières.', $this->periode));
+		$this->forward404Unless($this->regions = Doctrine::getTable('CopisimRegion')->getRegionsParPeriode($this->periode), sprintf('Pas de régions trouvées pour la période %s. Veuillez ajouter des régions.', $this->periode));
+		$this->forward404Unless($postes = Doctrine::getTable('CopisimPoste')->getPostesParPeriode($this->periode), sprintf('Pas de postes trouvées pour la période %s. Veuillez générer les postes.', $this->periode));
+		$this->form = new EditPosteForm();
+		$this->form->embed($postes);
+
+		$this->form->bind($request->getParameter($this->form->getName()));
+		if ($this->form->isValid())
+		{
+		  $this->form->embeddedSave();
+//			$count = $this->form->save($postes);
+//			$this->getUser()->setFlash('notice', $count.' postes ont été modifiés');
+      $this->getUser()->setFlash('notice', 'Des postes ont été modifiés');
+			$this->redirect('copisim_periode/ListEditPoste?id='.$this->periode);
+		}
+		$this->setTemplate('ListEditPoste');
 	}
 }

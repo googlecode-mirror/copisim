@@ -13,7 +13,7 @@ class choixActions extends sfActions
   public function executeIndex(sfWebRequest $request)
   {
 		if(null === $request->getParameter('periode'))
-			$periode = '2009';
+			$periode = '1';
 		else
 			$periode = $request->getParameter('periode');
 
@@ -24,7 +24,7 @@ class choixActions extends sfActions
 
   public function executeSimul(sfWebRequest $request)
   {
-		$periode = "2009"; // À définir une fonction CopisimPeriode::getActivePeriode()
+		$periode = "1"; // À définir une fonction CopisimPeriode::getActivePeriode()
 
 		$this->copisim_regions = Doctrine::getTable('CopisimRegion')->getRegionsParPeriode($periode);
 		$this->copisim_filieres = Doctrine::getTable('CopisimFiliere')->getFilieresParPeriode($periode);

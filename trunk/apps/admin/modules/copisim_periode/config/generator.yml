@@ -25,6 +25,7 @@ generator:
         batch_actions: {}
         object_actions:
           _edit: { label: Modifier }
+          editPoste: { label: Postes }
         actions:
           _new: { label: Ajouter }
       filter:
@@ -37,7 +38,7 @@ generator:
           _list: { label: Retour à la liste }
           importLastFiliere: { label: 1. Importer les filières de la dernière session }
           importLastRegion: { label: 2. Importer les lieux de la dernière session }
-          createPoste: { label: 3. Créer les postes correspondants }
+          generatePoste: { label: 3. Créer les postes correspondants }
       new:
         title: Ajouter une session de choix
         actions:

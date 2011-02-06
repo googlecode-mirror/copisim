@@ -13,10 +13,9 @@ class CopisimPosteTable extends Doctrine_Table
 		{
 			$q = Doctrine_Query::create()
 			  ->from('CopisimPoste a')
-				->leftJoin('a.CopisimPeriode b')
 				->leftJoin('a.CopisimFiliere c')
 				->leftJoin('a.CopisimRegion d')
-				->where('b.annee = ?', $periode)
+				->where('a.periode = ?', $periode)
 				->orderBy('d.titre asc, c.titre asc');
 		  
 			return $q->execute();
